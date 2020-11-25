@@ -237,6 +237,8 @@
                       "    pm.expect(pm.response.text()).to.include(\"\\\"url\\\":\\\"http://qa.com\");",
                       "    pm.expect(pm.response.text()).to.include(\"\\\"ortbVersion\\\":\\\"V2_3\");",
                       "    pm.expect(pm.response.text()).to.include(\"\\\"contacts\\\"\");",
+                      "    pm.expect(pm.response.text()).to.include(\"\\\"auctionMode\\\":\\\"FIRST_PRICE\");",
+                      "    pm.expect(pm.response.text()).to.include(\"\\\"type\\\":\\\"RTB\");",
                       "});",
                       "//Headers",
                       "pm.test(\"Check Headers\", function () {",
