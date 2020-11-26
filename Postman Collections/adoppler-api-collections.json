@@ -12,7 +12,7 @@
           "name": "Positive",
           "item": [
             {
-              "name": "Login_admin",
+              "name": "Login_admin_123343",
               "event": [
                 {
                   "listen": "test",
@@ -21,11 +21,7 @@
                     "exec": [
                       "//Status code",
                       "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                      "",
-                      "//No error message",
-                      "pm.test(\"No error message\", function () {",
-                      "    pm.expect(pm.response.text()).to.not.include(\"Invalid email or password. Please, try again.\");",
-                      "});",
+           
                       "",
                       "//Content",
                       "pm.test(\"Contains: token, refreshToken, role\", function () {",
