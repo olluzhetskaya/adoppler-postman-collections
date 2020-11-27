@@ -12,43 +12,6 @@
           "name": "Negative",
           "item": [
             {
-              "name": "Get_dsp_non_existent",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "id": "4ec8c586-f9d5-4483-b8b6-affe014abca6",
-                    "exec": [
-                      "//Status code",
-                      "tests[\"Status code is 404\"] = responseCode.code === 404;"
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "_postman_id": "c82bffe4-cb93-47b9-a97d-8b30a7c8c730",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "GET",
-                "header": [
-                  {
-                    "key": "X-Authorization",
-                    "type": "text",
-                    "value": "Bearer {{token}}"
-                  },
-                  {
-                    "key": "Content-Type",
-                    "type": "text",
-                    "value": "application/json"
-                  }
-                ],
-                "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/dsps/123"
-              },
-              "response": []
-            },
-            {
               "name": "Create_dsp_incorrect_url",
               "event": [
                 {
@@ -691,6 +654,43 @@
               "body": ""
             }
           ]
+        },
+        {
+          "name": "Get_dsp_non_existent",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "4ec8c586-f9d5-4483-b8b6-affe014abca6",
+                "exec": [
+                  "//Status code",
+                  "tests[\"Status code is 404\"] = responseCode.code === 404;"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "c82bffe4-cb93-47b9-a97d-8b30a7c8c730",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Authorization",
+                "type": "text",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/dsps/123"
+          },
+          "response": []
         }
       ],
       "_postman_id": "62d89a2a-9fd0-448f-8e0e-32a51c86491e",
