@@ -12,122 +12,6 @@
           "name": "Negative",
           "item": [
             {
-              "name": "Create_dsp_incorrect_status",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "id": "cfafc85f-3592-45df-8172-c73595e113a8",
-                    "exec": [
-                      "//Status code",
-                      "tests[\"Status code is 400\"] = responseCode.code === 400;",
-                      "",
-                      "//No error message",
-                      "pm.test(\"No error message\", function () {",
-                      "    pm.expect(pm.response.text()).to.not.include(\"Invalid email or password. Please, try again.\");",
-                      "});",
-                      "",
-                      "//Content",
-                      "pm.test(\"Error message contains:\", function () {",
-                      "    pm.expect(pm.response.text()).to.include(\"value not one of declared Enum instance names: [INACTIVE, ACTIVE]\");",
-                      "});",
-                      "",
-                      ""
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "_postman_id": "876fdea2-5129-41f0-8124-5947d484fec8",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "X-Authorization",
-                    "value": "Bearer {{token}}",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json",
-                    "type": "text"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"Postman: Demand Partner {{currentSprint}} {{startTimestamp}}\",\n  \"auctionMode\": \"FIRST_PRICE\",\n  \"bidfloor\": 0,\n  \"compression\": true,\n  \"contacts\": {\n    \"country\": \"BY\",\n    \"email\": \"so@adoppler.com\",\n    \"phone\": \"+375291111111\",\n    \"responsiblePerson\": \"QA QA\",\n    \"skype\": \"qa_qa\"\n  },\n \"cookieSyncBidirect\": false,\n  \"cookieSyncEnabled\": false,\n  \"cookieSyncRedirectParam\": null,\n  \"cookieSyncUrl\": null,\n  \"cookieSyncUserMacro\": null,\n  \"defaultAppBundleMapping\": \"string\",\n  \"dynamicRps\": true,\n  \"embedded\": true,\n  \"externalId\": null,\n  \"id\": 0,\n  \"ortbVersion\": \"V2_3\",\n  \"price\": 0,\n  \"privateAuction\": true,\n  \"requestFilter\": {\n    \"adTypes\": [\n      \"BANNER\"\n    ],\n    \"carriersAllow\": true,\n     \"countries\": [\n      \"BY\",\n      \"BE\"\n    ],\n    \"devices\": [\n      \"MOBILE_TABLET\"\n    ],\n    \"inventoryTypes\": {\n      \"allow\": true,\n      \"values\": [\n        \"DESKTOP_WEB\"\n      ]\n    },\n    \"oses\": [\n      \"ANDROID\"\n    ],\n    \"sizes\": [\n      {\n        \"width\": 576,\n        \"height\": 1024\n      }\n    ],\n    \"ssps\": {\n      \"allow\": true,\n      \"values\": [\n        0\n      ]\n    }\n  },\n  \"requireIfa\": true,\n  \"rpsLimit\": 0,\n  \"share\": 0,\n  \"sharedForAll\": true,\n  \"status\": \"\",\n  \"type\": \"RTB\",\n  \"url\": \"http://qa.com\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/dsps"
-              },
-              "response": []
-            },
-            {
-              "name": "Create_dsp_incorrect_auction_type",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "id": "d26794e5-a8f6-4174-b7a1-4469d53898c6",
-                    "exec": [
-                      "//Status code",
-                      "tests[\"Status code is 400\"] = responseCode.code === 400;",
-                      "",
-                      "//No error message",
-                      "pm.test(\"No error message\", function () {",
-                      "    pm.expect(pm.response.text()).to.not.include(\"Invalid email or password. Please, try again.\");",
-                      "});",
-                      "",
-                      "//Content",
-                      "pm.test(\"Error message contains:\", function () {",
-                      "    pm.expect(pm.response.text()).to.include(\"value not one of declared Enum instance names: [FIRST_PRICE, MIXED, SECOND_PRICE, DEAL_BIDFLOOR]\");",
-                      "});",
-                      "",
-                      ""
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "_postman_id": "c4e21c08-285b-4898-a69f-3c026db60ffb",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "X-Authorization",
-                    "value": "Bearer {{token}}",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json",
-                    "type": "text"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"Postman: Demand Partner {{currentSprint}} {{startTimestamp}}\",\n  \"auctionMode\": \"incorrect_auction_type\",\n  \"bidfloor\": 0,\n  \"compression\": true,\n  \"contacts\": {\n    \"country\": \"BY\",\n    \"email\": \"so@adoppler.com\",\n    \"phone\": \"+375291111111\",\n    \"responsiblePerson\": \"QA QA\",\n    \"skype\": \"qa_qa\"\n  },\n \"cookieSyncBidirect\": false,\n  \"cookieSyncEnabled\": false,\n  \"cookieSyncRedirectParam\": null,\n  \"cookieSyncUrl\": null,\n  \"cookieSyncUserMacro\": null,\n  \"defaultAppBundleMapping\": \"string\",\n  \"dynamicRps\": true,\n  \"embedded\": true,\n  \"externalId\": null,\n  \"id\": 0,\n  \"ortbVersion\": \"V2_3\",\n  \"price\": 0,\n  \"privateAuction\": true,\n  \"requestFilter\": {\n    \"adTypes\": [\n      \"BANNER\"\n    ],\n    \"carriersAllow\": true,\n     \"countries\": [\n      \"BY\",\n      \"BE\"\n    ],\n    \"devices\": [\n      \"MOBILE_TABLET\"\n    ],\n    \"inventoryTypes\": {\n      \"allow\": true,\n      \"values\": [\n        \"DESKTOP_WEB\"\n      ]\n    },\n    \"oses\": [\n      \"ANDROID\"\n    ],\n    \"sizes\": [\n      {\n        \"width\": 576,\n        \"height\": 1024\n      }\n    ],\n    \"ssps\": {\n      \"allow\": true,\n      \"values\": [\n        0\n      ]\n    }\n  },\n  \"requireIfa\": true,\n  \"rpsLimit\": 0,\n  \"share\": 0,\n  \"sharedForAll\": true,\n  \"status\": \"ACTIVE\",\n  \"type\": \"RTB\",\n  \"url\": \"http://qa.com\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/dsps"
-              },
-              "response": []
-            },
-            {
               "name": "Update_dsp_incorrect_dsp_type",
               "event": [
                 {
@@ -682,6 +566,122 @@
             "body": {
               "mode": "raw",
               "raw": "{\n  \"name\": \"Postman: Demand Partner {{currentSprint}} {{startTimestamp}}\",\n  \"auctionMode\": \"FIRST_PRICE\",\n  \"bidfloor\": 0,\n  \"compression\": true,\n  \"contacts\": {\n    \"country\": \"BY\",\n    \"email\": \"so@adoppler.com\",\n    \"phone\": \"+375291111111\",\n    \"responsiblePerson\": \"QA QA\",\n    \"skype\": \"qa_qa\"\n  },\n \"cookieSyncBidirect\": false,\n  \"cookieSyncEnabled\": false,\n  \"cookieSyncRedirectParam\": null,\n  \"cookieSyncUrl\": null,\n  \"cookieSyncUserMacro\": null,\n  \"defaultAppBundleMapping\": \"string\",\n  \"dynamicRps\": true,\n  \"embedded\": true,\n  \"externalId\": null,\n  \"id\": 0,\n  \"ortbVersion\": \"V2_3\",\n  \"price\": null,\n  \"privateAuction\": true,\n  \"requestFilter\": {\n    \"adTypes\": [\n      \"BANNER\"\n    ],\n    \"carriersAllow\": true,\n     \"countries\": [\n      \"BY\",\n      \"BE\"\n    ],\n    \"devices\": [\n      \"MOBILE_TABLET\"\n    ],\n    \"inventoryTypes\": {\n      \"allow\": true,\n      \"values\": [\n        \"DESKTOP_WEB\"\n      ]\n    },\n    \"oses\": [\n      \"ANDROID\"\n    ],\n    \"sizes\": [\n      {\n        \"width\": 576,\n        \"height\": 1024\n      }\n    ],\n    \"ssps\": {\n      \"allow\": true,\n      \"values\": [\n        0\n      ]\n    }\n  },\n  \"requireIfa\": true,\n  \"rpsLimit\": 0,\n  \"share\": 0,\n  \"sharedForAll\": true,\n  \"status\": \"ACTIVE\",\n  \"type\": \"TAG\",\n  \"url\": \"http://qa.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/dsps"
+          },
+          "response": []
+        },
+        {
+          "name": "Create_dsp_incorrect_status",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "cfafc85f-3592-45df-8172-c73595e113a8",
+                "exec": [
+                  "//Status code",
+                  "tests[\"Status code is 400\"] = responseCode.code === 400;",
+                  "",
+                  "//No error message",
+                  "pm.test(\"No error message\", function () {",
+                  "    pm.expect(pm.response.text()).to.not.include(\"Invalid email or password. Please, try again.\");",
+                  "});",
+                  "",
+                  "//Content",
+                  "pm.test(\"Error message contains:\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(\"value not one of declared Enum instance names: [INACTIVE, ACTIVE]\");",
+                  "});",
+                  "",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "876fdea2-5129-41f0-8124-5947d484fec8",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Postman: Demand Partner {{currentSprint}} {{startTimestamp}}\",\n  \"auctionMode\": \"FIRST_PRICE\",\n  \"bidfloor\": 0,\n  \"compression\": true,\n  \"contacts\": {\n    \"country\": \"BY\",\n    \"email\": \"so@adoppler.com\",\n    \"phone\": \"+375291111111\",\n    \"responsiblePerson\": \"QA QA\",\n    \"skype\": \"qa_qa\"\n  },\n \"cookieSyncBidirect\": false,\n  \"cookieSyncEnabled\": false,\n  \"cookieSyncRedirectParam\": null,\n  \"cookieSyncUrl\": null,\n  \"cookieSyncUserMacro\": null,\n  \"defaultAppBundleMapping\": \"string\",\n  \"dynamicRps\": true,\n  \"embedded\": true,\n  \"externalId\": null,\n  \"id\": 0,\n  \"ortbVersion\": \"V2_3\",\n  \"price\": 0,\n  \"privateAuction\": true,\n  \"requestFilter\": {\n    \"adTypes\": [\n      \"BANNER\"\n    ],\n    \"carriersAllow\": true,\n     \"countries\": [\n      \"BY\",\n      \"BE\"\n    ],\n    \"devices\": [\n      \"MOBILE_TABLET\"\n    ],\n    \"inventoryTypes\": {\n      \"allow\": true,\n      \"values\": [\n        \"DESKTOP_WEB\"\n      ]\n    },\n    \"oses\": [\n      \"ANDROID\"\n    ],\n    \"sizes\": [\n      {\n        \"width\": 576,\n        \"height\": 1024\n      }\n    ],\n    \"ssps\": {\n      \"allow\": true,\n      \"values\": [\n        0\n      ]\n    }\n  },\n  \"requireIfa\": true,\n  \"rpsLimit\": 0,\n  \"share\": 0,\n  \"sharedForAll\": true,\n  \"status\": \"\",\n  \"type\": \"RTB\",\n  \"url\": \"http://qa.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/dsps"
+          },
+          "response": []
+        },
+        {
+          "name": "Create_dsp_incorrect_auction_type",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "d26794e5-a8f6-4174-b7a1-4469d53898c6",
+                "exec": [
+                  "//Status code",
+                  "tests[\"Status code is 400\"] = responseCode.code === 400;",
+                  "",
+                  "//No error message",
+                  "pm.test(\"No error message\", function () {",
+                  "    pm.expect(pm.response.text()).to.not.include(\"Invalid email or password. Please, try again.\");",
+                  "});",
+                  "",
+                  "//Content",
+                  "pm.test(\"Error message contains:\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(\"value not one of declared Enum instance names: [FIRST_PRICE, MIXED, SECOND_PRICE, DEAL_BIDFLOOR]\");",
+                  "});",
+                  "",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "c4e21c08-285b-4898-a69f-3c026db60ffb",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Postman: Demand Partner {{currentSprint}} {{startTimestamp}}\",\n  \"auctionMode\": \"incorrect_auction_type\",\n  \"bidfloor\": 0,\n  \"compression\": true,\n  \"contacts\": {\n    \"country\": \"BY\",\n    \"email\": \"so@adoppler.com\",\n    \"phone\": \"+375291111111\",\n    \"responsiblePerson\": \"QA QA\",\n    \"skype\": \"qa_qa\"\n  },\n \"cookieSyncBidirect\": false,\n  \"cookieSyncEnabled\": false,\n  \"cookieSyncRedirectParam\": null,\n  \"cookieSyncUrl\": null,\n  \"cookieSyncUserMacro\": null,\n  \"defaultAppBundleMapping\": \"string\",\n  \"dynamicRps\": true,\n  \"embedded\": true,\n  \"externalId\": null,\n  \"id\": 0,\n  \"ortbVersion\": \"V2_3\",\n  \"price\": 0,\n  \"privateAuction\": true,\n  \"requestFilter\": {\n    \"adTypes\": [\n      \"BANNER\"\n    ],\n    \"carriersAllow\": true,\n     \"countries\": [\n      \"BY\",\n      \"BE\"\n    ],\n    \"devices\": [\n      \"MOBILE_TABLET\"\n    ],\n    \"inventoryTypes\": {\n      \"allow\": true,\n      \"values\": [\n        \"DESKTOP_WEB\"\n      ]\n    },\n    \"oses\": [\n      \"ANDROID\"\n    ],\n    \"sizes\": [\n      {\n        \"width\": 576,\n        \"height\": 1024\n      }\n    ],\n    \"ssps\": {\n      \"allow\": true,\n      \"values\": [\n        0\n      ]\n    }\n  },\n  \"requireIfa\": true,\n  \"rpsLimit\": 0,\n  \"share\": 0,\n  \"sharedForAll\": true,\n  \"status\": \"ACTIVE\",\n  \"type\": \"RTB\",\n  \"url\": \"http://qa.com\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
