@@ -6,727 +6,11 @@
   },
   "item": [
     {
-      "name": "Demand Partner (CRUD)",
+      "name": "Demand Partner (Extended)",
       "item": [
-        {
-          "name": "Positive",
-          "item": [
-            {
-              "name": "Login_admin",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "id": "0aed85df-83f8-49aa-890f-464e35458171",
-                    "exec": [
-                      "//Status code",
-                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                      "",
-                      "//No error message",
-                      "pm.test(\"No error message\", function () {",
-                      "    pm.expect(pm.response.text()).to.not.include(\"Invalid email or password. Please, try again.\");",
-                      "});",
-                      "",
-                      "//Content",
-                      "pm.test(\"Contains: token, refreshToken, role\", function () {",
-                      "    pm.expect(pm.response.text()).to.include(\"token\");",
-                      "    pm.expect(pm.response.text()).to.include(\"refreshToken\");",
-                      "    pm.expect(pm.response.text()).to.include(\"permissions\");",
-                      "});",
-                      "",
-                      "",
-                      "//Permissions",
-                      "pm.test(\"Role is Global Tenant Admin\", function () {",
-                      "pm.expect(pm.response.text()).to.include(\"\\\"DSP_WRITE\\\"\");",
-                      "pm.expect(pm.response.text()).to.include(\"\\\"DSP_READ\\\"\");",
-                      "});",
-                      "",
-                      "//Set token variable",
-                      "var jsonData = JSON.parse(responseBody);",
-                      "pm.environment.set(\"token\", jsonData.token);"
-                    ],
-                    "type": "text/javascript"
-                  }
-                },
-                {
-                  "listen": "prerequest",
-                  "script": {
-                    "id": "bf608938-b3a1-4804-89e9-fb76d38ce67e",
-                    "exec": [
-                      "//Save current time before start",
-                      "pm.environment.set(\"startTimestamp\", (new Date()).toISOString());"
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "_postman_id": "2c476d0e-127c-4f7c-a253-378cd2761242",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "auth": {
-                  "type": "noauth"
-                },
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n    \"email\": \"admin@admin.com\",\n    \"password\": \"7895123\"\n}",
-                  "options": {
-                    "raw": {}
-                  }
-                },
-                "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/auth/login"
-              },
-              "response": [
-                {
-                  "id": "410c010c-46e5-44d6-95bc-d5501cec3c03",
-                  "name": "Forbidden",
-                  "originalRequest": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\n    \"email\": \"<string>\",\n    \"password\": \"<string>\"\n}"
-                    },
-                    "url": "{{baseUrl}}/api/v2/auth/login"
-                  },
-                  "status": "Forbidden",
-                  "code": 403,
-                  "_postman_previewlanguage": "text",
-                  "header": [
-                    {
-                      "key": "Content-Type",
-                      "value": "text/plain"
-                    }
-                  ],
-                  "cookie": [],
-                  "responseTime": null,
-                  "body": ""
-                },
-                {
-                  "id": "77b1e7e7-4714-4919-9585-f0074bfa3493",
-                  "name": "OK",
-                  "originalRequest": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\n    \"email\": \"<string>\",\n    \"password\": \"<string>\"\n}"
-                    },
-                    "url": "{{baseUrl}}/api/v2/auth/login"
-                  },
-                  "status": "OK",
-                  "code": 200,
-                  "_postman_previewlanguage": "text",
-                  "header": [
-                    {
-                      "key": "Content-Type",
-                      "value": "*/*"
-                    }
-                  ],
-                  "cookie": [],
-                  "responseTime": null,
-                  "body": ""
-                },
-                {
-                  "id": "77df7394-d51a-4633-aef7-03a362257d97",
-                  "name": "Unauthorized",
-                  "originalRequest": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\n    \"email\": \"<string>\",\n    \"password\": \"<string>\"\n}"
-                    },
-                    "url": "{{baseUrl}}/api/v2/auth/login"
-                  },
-                  "status": "Unauthorized",
-                  "code": 401,
-                  "_postman_previewlanguage": "text",
-                  "header": [
-                    {
-                      "key": "Content-Type",
-                      "value": "text/plain"
-                    }
-                  ],
-                  "cookie": [],
-                  "responseTime": null,
-                  "body": ""
-                },
-                {
-                  "id": "b7eda96d-4eaa-40eb-acd4-08164caf0ee3",
-                  "name": "Created",
-                  "originalRequest": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\n    \"email\": \"<string>\",\n    \"password\": \"<string>\"\n}"
-                    },
-                    "url": "{{baseUrl}}/api/v2/auth/login"
-                  },
-                  "status": "Created",
-                  "code": 201,
-                  "_postman_previewlanguage": "text",
-                  "header": [
-                    {
-                      "key": "Content-Type",
-                      "value": "text/plain"
-                    }
-                  ],
-                  "cookie": [],
-                  "responseTime": null,
-                  "body": ""
-                },
-                {
-                  "id": "f3ae065a-3e4a-4e85-b1c6-e3a5e101446d",
-                  "name": "Not Found",
-                  "originalRequest": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\n    \"email\": \"<string>\",\n    \"password\": \"<string>\"\n}"
-                    },
-                    "url": "{{baseUrl}}/api/v2/auth/login"
-                  },
-                  "status": "Not Found",
-                  "code": 404,
-                  "_postman_previewlanguage": "text",
-                  "header": [
-                    {
-                      "key": "Content-Type",
-                      "value": "text/plain"
-                    }
-                  ],
-                  "cookie": [],
-                  "responseTime": null,
-                  "body": ""
-                }
-              ]
-            },
-            {
-              "name": "Create_dsp_valid",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "id": "47657051-2773-4384-b896-85dcb2248ad2",
-                    "exec": [
-                      "//Status code",
-                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                      "",
-                      "//No error message",
-                      "pm.test(\"No error message\", function () {",
-                      "    pm.expect(pm.response.text()).to.not.include(\"Invalid email or password. Please, try again.\");",
-                      "});",
-                      "",
-                      "//Content",
-                      "pm.test(\"Contains: id, name\", function () {",
-                      "    pm.expect(pm.response.text()).to.include(\"\\\"id\\\"\");",
-                      "    pm.expect(pm.response.text()).to.include(\"\\\"externalId\\\"\");",
-                      "    pm.expect(pm.response.text()).to.include(\"\\\"name\\\":\\\"Postman: Demand Partner\");",
-                      "    pm.expect(pm.response.text()).to.include(\"\\\"status\\\":\\\"ACTIVE\");",
-                      "    pm.expect(pm.response.text()).to.include(\"\\\"url\\\":\\\"http://qa.com\");",
-                      "    pm.expect(pm.response.text()).to.include(\"\\\"ortbVersion\\\":\\\"V2_3\");",
-                      "    pm.expect(pm.response.text()).to.include(\"\\\"contacts\\\"\");",
-                      "    pm.expect(pm.response.text()).to.include(\"\\\"auctionMode\\\":\\\"FIRST_PRICE\");",
-                      "    pm.expect(pm.response.text()).to.include(\"\\\"type\\\":\\\"RTB\");",
-                      "});",
-                      "//Headers",
-                      "pm.test(\"Check Headers\", function () {",
-                      "    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json;charset=utf-8');",
-                      "    pm.expect(pm.response.headers.get('Connection')).to.eql('keep-alive');",
-                      "    pm.expect(pm.response.headers.get('Cache-Control')).to.eql('no-cache, no-store, max-age=0, must-revalidate');",
-                      "    pm.expect(pm.response.headers.get('X-Content-Type-Options')).to.eql('nosniff');",
-                      "    pm.expect(pm.response.headers.get('X-XSS-Protection')).to.eql('1; mode=block');",
-                      "    pm.expect(pm.response.headers.get('X-Frame-Options')).to.eql('DENY');    ",
-                      "});",
-                      "",
-                      "//Set token variable",
-                      "var jsonData = JSON.parse(responseBody);",
-                      "pm.environment.set(\"dspId\", jsonData.id);"
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "_postman_id": "561b113c-192a-4427-a6cd-8245db09eeb6",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "X-Authorization",
-                    "value": "Bearer {{token}}",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json",
-                    "type": "text"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"Postman: Demand Partner {{currentSprint}} {{startTimestamp}}\",\n  \"auctionMode\": \"FIRST_PRICE\",\n  \"bidfloor\": 0,\n  \"compression\": true,\n  \"contacts\": {\n    \"country\": \"BY\",\n    \"email\": \"so@adoppler.com\",\n    \"phone\": \"+375291111111\",\n    \"responsiblePerson\": \"QA QA\",\n    \"skype\": \"qa_qa\"\n  },\n \"cookieSyncBidirect\": false,\n  \"cookieSyncEnabled\": false,\n  \"cookieSyncRedirectParam\": null,\n  \"cookieSyncUrl\": null,\n  \"cookieSyncUserMacro\": null,\n  \"defaultAppBundleMapping\": \"string\",\n  \"dynamicRps\": true,\n  \"embedded\": true,\n  \"externalId\": null,\n  \"id\": 0,\n  \"ortbVersion\": \"V2_3\",\n  \"price\": 0,\n  \"privateAuction\": true,\n  \"requestFilter\": {\n    \"adTypes\": [\n      \"BANNER\"\n    ],\n    \"carriersAllow\": true,\n     \"countries\": [\n      \"BY\",\n      \"BE\"\n    ],\n    \"devices\": [\n      \"MOBILE_TABLET\"\n    ],\n    \"inventoryTypes\": {\n      \"allow\": true,\n      \"values\": [\n        \"DESKTOP_WEB\"\n      ]\n    },\n    \"oses\": [\n      \"ANDROID\"\n    ],\n    \"sizes\": [\n      {\n        \"width\": 576,\n        \"height\": 1024\n      }\n    ],\n    \"ssps\": {\n      \"allow\": true,\n      \"values\": [\n        0\n      ]\n    }\n  },\n  \"requireIfa\": true,\n  \"rpsLimit\": 0,\n  \"share\": 0,\n  \"sharedForAll\": true,\n  \"status\": \"ACTIVE\",\n  \"type\": \"RTB\",\n  \"url\": \"http://qa.com\"\n}",
-                  "options": {
-                    "raw": {}
-                  }
-                },
-                "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/dsps"
-              },
-              "response": []
-            },
-            {
-              "name": "Get_dsp",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "id": "3cb0c76c-78ea-4f31-a709-552b8490a2e0",
-                    "exec": [
-                      "//Status code",
-                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                      "",
-                      "//Content",
-                      "pm.test(\"Contains: id, name\", function () {",
-                      "    pm.expect(pm.response.text()).to.include(pm.environment.get(\"dspId\"));",
-                      "    pm.expect(pm.response.text()).to.include(\"\\\"externalId\\\"\");",
-                      "    pm.expect(pm.response.text()).to.include(\"\\\"name\\\":\\\"Postman: Demand Partner\");",
-                      "    pm.expect(pm.response.text()).to.include(\"\\\"status\\\":\\\"ACTIVE\");",
-                      "    pm.expect(pm.response.text()).to.include(\"\\\"url\\\":\\\"http://qa.com\");",
-                      "    pm.expect(pm.response.text()).to.include(\"\\\"ortbVersion\\\":\\\"V2_3\");",
-                      "    pm.expect(pm.response.text()).to.include(\"\\\"contacts\\\"\");",
-                      "    pm.expect(pm.response.text()).to.include(\"\\\"type\\\":\\\"TAG\");",
-                      "    pm.expect(pm.response.text()).to.include(\"\\\"auctionMode\\\":\\\"FIRST_PRICE\");",
-                      "",
-                      "    //\"price: 0\" has been passed and \"price: 0E-8\" recieved. Is it OK?",
-                      "    pm.expect(pm.response.text()).to.include(\"\\\"price\\\":\\\"0E-8\");",
-                      "",
-                      "});",
-                      "//Headers",
-                      "pm.test(\"Check Headers\", function () {",
-                      "    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json;charset=utf-8');",
-                      "    pm.expect(pm.response.headers.get('Connection')).to.eql('keep-alive');",
-                      "    pm.expect(pm.response.headers.get('Cache-Control')).to.eql('no-cache, no-store, max-age=0, must-revalidate');",
-                      "    pm.expect(pm.response.headers.get('X-Content-Type-Options')).to.eql('nosniff');",
-                      "    pm.expect(pm.response.headers.get('X-XSS-Protection')).to.eql('1; mode=block');",
-                      "    pm.expect(pm.response.headers.get('X-Frame-Options')).to.eql('DENY');    ",
-                      "});"
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "_postman_id": "e1662110-8687-466f-a541-28b68aa529ca",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "GET",
-                "header": [
-                  {
-                    "key": "X-Authorization",
-                    "value": "Bearer {{token}}",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json",
-                    "type": "text"
-                  }
-                ],
-                "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/dsps/{{dspId}}"
-              },
-              "response": []
-            },
-            {
-              "name": "Update_dsp_status_INACTIVE",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "id": "5254e819-4001-4e78-968f-c1b5429b7260",
-                    "exec": [
-                      "//Status code",
-                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                      "",
-                      "//No error message",
-                      "pm.test(\"No error message\", function () {",
-                      "    pm.expect(pm.response.text()).to.not.include(\"Invalid email or password. Please, try again.\");",
-                      "});",
-                      "",
-                      "// Content",
-                      "pm.test(\"Contains: id, status: INACTIVE\", function () {",
-                      "     pm.expect(pm.response.text()).to.include(pm.environment.get(\"dspId\"));",
-                      "    pm.expect(pm.response.text()).to.include(\"\\\"status\\\":\\\"INACTIVE\");",
-                      "});"
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "_postman_id": "987ec55b-db4e-405a-b16a-1aad3fda6d9d",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "PUT",
-                "header": [
-                  {
-                    "key": "X-Authorization",
-                    "value": "Bearer {{token}}",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json",
-                    "type": "text"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"Postman: Demand Partner {{currentSprint}} {{startTimestamp}}\",\n  \"auctionMode\": \"FIRST_PRICE\",\n  \"bidfloor\": 0,\n  \"compression\": true,\n  \"contacts\": {\n    \"country\": \"BY\",\n    \"email\": \"so@adoppler.com\",\n    \"phone\": \"+375291111111\",\n    \"responsiblePerson\": \"QA QA\",\n    \"skype\": \"qa_qa\"\n  },\n \"cookieSyncBidirect\": false,\n  \"cookieSyncEnabled\": false,\n  \"cookieSyncRedirectParam\": null,\n  \"cookieSyncUrl\": null,\n  \"cookieSyncUserMacro\": null,\n  \"defaultAppBundleMapping\": \"string\",\n  \"dynamicRps\": true,\n  \"embedded\": true,\n  \"externalId\": null,\n  \"id\": 0,\n  \"ortbVersion\": \"V2_3\",\n  \"price\": 0,\n  \"privateAuction\": true,\n  \"requestFilter\": {\n    \"adTypes\": [\n      \"BANNER\"\n    ],\n    \"carriersAllow\": true,\n     \"countries\": [\n      \"BY\",\n      \"BE\"\n    ],\n    \"devices\": [\n      \"MOBILE_TABLET\"\n    ],\n    \"inventoryTypes\": {\n      \"allow\": true,\n      \"values\": [\n        \"DESKTOP_WEB\"\n      ]\n    },\n    \"oses\": [\n      \"ANDROID\"\n    ],\n    \"sizes\": [\n      {\n        \"width\": 576,\n        \"height\": 1024\n      }\n    ],\n    \"ssps\": {\n      \"allow\": true,\n      \"values\": [\n        0\n      ]\n    }\n  },\n  \"requireIfa\": true,\n  \"rpsLimit\": 0,\n  \"share\": 0,\n  \"sharedForAll\": true,\n  \"status\": \"INACTIVE\",\n  \"type\": \"RTB\",\n  \"url\": \"http://qa.com\"\n}",
-                  "options": {
-                    "raw": {}
-                  }
-                },
-                "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/dsps/{{dspId}}"
-              },
-              "response": []
-            },
-            {
-              "name": "Create_dsp_type_TAG_valid",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "id": "23c6cf7c-0f16-4b7d-9b24-a90f63a6e471",
-                    "exec": [
-                      "//Status code",
-                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                      "",
-                      "//No error message",
-                      "pm.test(\"No error message\", function () {",
-                      "    pm.expect(pm.response.text()).to.not.include(\"Invalid email or password. Please, try again.\");",
-                      "});",
-                      "",
-                      "// Type",
-                      "pm.test(\"Type: TAG\", function () {",
-                      "    pm.expect(pm.response.text()).to.include(\"\\\"type\\\":\\\"TAG\");",
-                      "});"
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "_postman_id": "886ac7cd-8545-4de7-b452-934946e140dd",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "X-Authorization",
-                    "value": "Bearer {{token}}",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json",
-                    "type": "text"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"Postman: Demand Partner {{currentSprint}} {{startTimestamp}}\",\n  \"auctionMode\": \"FIRST_PRICE\",\n  \"bidfloor\": 0,\n  \"compression\": true,\n  \"contacts\": {\n    \"country\": \"BY\",\n    \"email\": \"so@adoppler.com\",\n    \"phone\": \"+375291111111\",\n    \"responsiblePerson\": \"QA QA\",\n    \"skype\": \"qa_qa\"\n  },\n \"cookieSyncBidirect\": false,\n  \"cookieSyncEnabled\": false,\n  \"cookieSyncRedirectParam\": null,\n  \"cookieSyncUrl\": null,\n  \"cookieSyncUserMacro\": null,\n  \"defaultAppBundleMapping\": \"string\",\n  \"dynamicRps\": true,\n  \"embedded\": true,\n  \"externalId\": null,\n  \"id\": 0,\n  \"ortbVersion\": \"V2_3\",\n  \"price\": 0,\n  \"privateAuction\": true,\n  \"requestFilter\": {\n    \"adTypes\": [\n      \"BANNER\"\n    ],\n    \"carriersAllow\": true,\n     \"countries\": [\n      \"BY\",\n      \"BE\"\n    ],\n    \"devices\": [\n      \"MOBILE_TABLET\"\n    ],\n    \"inventoryTypes\": {\n      \"allow\": true,\n      \"values\": [\n        \"DESKTOP_WEB\"\n      ]\n    },\n    \"oses\": [\n      \"ANDROID\"\n    ],\n    \"sizes\": [\n      {\n        \"width\": 576,\n        \"height\": 1024\n      }\n    ],\n    \"ssps\": {\n      \"allow\": true,\n      \"values\": [\n        0\n      ]\n    }\n  },\n  \"requireIfa\": true,\n  \"rpsLimit\": 0,\n  \"share\": 0,\n  \"sharedForAll\": true,\n  \"status\": \"ACTIVE\",\n  \"type\": \"TAG\",\n  \"url\": \"http://qa.com\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/dsps"
-              },
-              "response": []
-            },
-            {
-              "name": "Create_dsp_TAG_null_ortbVersion",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "id": "6686fbaf-c56a-4eba-8b9b-3bdfde3e39b5",
-                    "exec": [
-                      "//Status code",
-                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                      "",
-                      "//No error message",
-                      "pm.test(\"No error message\", function () {",
-                      "    pm.expect(pm.response.text()).to.not.include(\"Invalid email or password. Please, try again.\");",
-                      "});",
-                      "",
-                      "// Check ortbVersion is not required for dsp with TAG type",
-                      "pm.test(\"Contains: bidfloor, ortbVersion are null\", function () {",
-                      "    pm.expect(pm.response.text()).to.include(\"\\\"ortbVersion\\\":null\");",
-                      "    pm.expect(pm.response.text()).to.include(\"\\\"type\\\":\\\"TAG\");",
-                      "});",
-                      "",
-                      "",
-                      ""
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "_postman_id": "3104a5f8-37c6-4d18-98c5-d0ef38f6e1de",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "X-Authorization",
-                    "value": "Bearer {{token}}",
-                    "type": "text"
-                  },
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json",
-                    "type": "text"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"Postman: Demand Partner {{currentSprint}} {{startTimestamp}}\",\n  \"auctionMode\": \"FIRST_PRICE\",\n  \"bidfloor\": 0,\n  \"compression\": true,\n  \"contacts\": {\n    \"country\": \"BY\",\n    \"email\": \"so@adoppler.com\",\n    \"phone\": \"+375291111111\",\n    \"responsiblePerson\": \"QA QA\",\n    \"skype\": \"qa_qa\"\n  },\n \"cookieSyncBidirect\": false,\n  \"cookieSyncEnabled\": false,\n  \"cookieSyncRedirectParam\": null,\n  \"cookieSyncUrl\": null,\n  \"cookieSyncUserMacro\": null,\n  \"defaultAppBundleMapping\": \"string\",\n  \"dynamicRps\": true,\n  \"embedded\": true,\n  \"externalId\": null,\n  \"id\": 0,\n  \"ortbVersion\": null,\n  \"price\": 0,\n  \"privateAuction\": true,\n  \"requestFilter\": {\n    \"adTypes\": [\n      \"BANNER\"\n    ],\n    \"carriersAllow\": true,\n     \"countries\": [\n      \"BY\",\n      \"BE\"\n    ],\n    \"devices\": [\n      \"MOBILE_TABLET\"\n    ],\n    \"inventoryTypes\": {\n      \"allow\": true,\n      \"values\": [\n        \"DESKTOP_WEB\"\n      ]\n    },\n    \"oses\": [\n      \"ANDROID\"\n    ],\n    \"sizes\": [\n      {\n        \"width\": 576,\n        \"height\": 1024\n      }\n    ],\n    \"ssps\": {\n      \"allow\": true,\n      \"values\": [\n        0\n      ]\n    }\n  },\n  \"requireIfa\": true,\n  \"rpsLimit\": 0,\n  \"share\": 0,\n  \"sharedForAll\": true,\n  \"status\": \"ACTIVE\",\n  \"type\": \"TAG\",\n  \"url\": \"http://qa.com\"\n}",
-                  "options": {
-                    "raw": {}
-                  }
-                },
-                "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/dsps"
-              },
-              "response": []
-            }
-          ],
-          "_postman_id": "56cfa529-d989-4505-90db-473450d9f34e",
-          "_postman_isSubFolder": true
-        },
         {
           "name": "Negative",
           "item": [
-            {
-              "name": "Login_admin",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "id": "8708e0f8-517f-477a-ab52-202bcca5c649",
-                    "exec": [
-                      "//Status code",
-                      "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                      "",
-                      "//No error message",
-                      "pm.test(\"No error message\", function () {",
-                      "    pm.expect(pm.response.text()).to.not.include(\"Invalid email or password. Please, try again.\");",
-                      "});",
-                      "",
-                      "//Content",
-                      "pm.test(\"Contains: token, refreshToken, role\", function () {",
-                      "    pm.expect(pm.response.text()).to.include(\"token\");",
-                      "    pm.expect(pm.response.text()).to.include(\"refreshToken\");",
-                      "    pm.expect(pm.response.text()).to.include(\"permissions\");",
-                      "});",
-                      "",
-                      "",
-                      "//Permissions",
-                      "pm.test(\"Role is Global Tenant Admin\", function () {",
-                      "pm.expect(pm.response.text()).to.include(\"\\\"DSP_WRITE\\\"\");",
-                      "pm.expect(pm.response.text()).to.include(\"\\\"DSP_READ\\\"\");",
-                      "});",
-                      "",
-                      "//Set token variable",
-                      "var jsonData = JSON.parse(responseBody);",
-                      "pm.environment.set(\"token\", jsonData.token);"
-                    ],
-                    "type": "text/javascript"
-                  }
-                },
-                {
-                  "listen": "prerequest",
-                  "script": {
-                    "id": "b7ed3edf-dea0-455d-895d-a29416169123",
-                    "exec": [
-                      "//Save current time before start",
-                      "pm.environment.set(\"startTimestamp\", (new Date()).toISOString());"
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "_postman_id": "bffacc70-2eeb-4495-b731-4c901122a7e3",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "auth": {
-                  "type": "noauth"
-                },
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n    \"email\": \"admin@admin.com\",\n    \"password\": \"7895123\"\n}",
-                  "options": {
-                    "raw": {}
-                  }
-                },
-                "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/auth/login"
-              },
-              "response": [
-                {
-                  "id": "07252e90-4ddd-49ae-a6f7-37e897ced8f5",
-                  "name": "Not Found",
-                  "originalRequest": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\n    \"email\": \"<string>\",\n    \"password\": \"<string>\"\n}"
-                    },
-                    "url": "{{baseUrl}}/api/v2/auth/login"
-                  },
-                  "status": "Not Found",
-                  "code": 404,
-                  "_postman_previewlanguage": "text",
-                  "header": [
-                    {
-                      "key": "Content-Type",
-                      "value": "text/plain"
-                    }
-                  ],
-                  "cookie": [],
-                  "responseTime": null,
-                  "body": ""
-                },
-                {
-                  "id": "2555799f-bced-4c4c-b59e-f70f2f7af28d",
-                  "name": "OK",
-                  "originalRequest": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\n    \"email\": \"<string>\",\n    \"password\": \"<string>\"\n}"
-                    },
-                    "url": "{{baseUrl}}/api/v2/auth/login"
-                  },
-                  "status": "OK",
-                  "code": 200,
-                  "_postman_previewlanguage": "text",
-                  "header": [
-                    {
-                      "key": "Content-Type",
-                      "value": "*/*"
-                    }
-                  ],
-                  "cookie": [],
-                  "responseTime": null,
-                  "body": ""
-                },
-                {
-                  "id": "4992eb5b-cff0-4721-a5bd-63a4999b561f",
-                  "name": "Created",
-                  "originalRequest": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\n    \"email\": \"<string>\",\n    \"password\": \"<string>\"\n}"
-                    },
-                    "url": "{{baseUrl}}/api/v2/auth/login"
-                  },
-                  "status": "Created",
-                  "code": 201,
-                  "_postman_previewlanguage": "text",
-                  "header": [
-                    {
-                      "key": "Content-Type",
-                      "value": "text/plain"
-                    }
-                  ],
-                  "cookie": [],
-                  "responseTime": null,
-                  "body": ""
-                },
-                {
-                  "id": "5fd9d4be-f38d-4cbb-aa86-97866b0d894e",
-                  "name": "Forbidden",
-                  "originalRequest": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\n    \"email\": \"<string>\",\n    \"password\": \"<string>\"\n}"
-                    },
-                    "url": "{{baseUrl}}/api/v2/auth/login"
-                  },
-                  "status": "Forbidden",
-                  "code": 403,
-                  "_postman_previewlanguage": "text",
-                  "header": [
-                    {
-                      "key": "Content-Type",
-                      "value": "text/plain"
-                    }
-                  ],
-                  "cookie": [],
-                  "responseTime": null,
-                  "body": ""
-                },
-                {
-                  "id": "b25471d7-7431-4022-9802-c594b8b83edd",
-                  "name": "Unauthorized",
-                  "originalRequest": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\n    \"email\": \"<string>\",\n    \"password\": \"<string>\"\n}"
-                    },
-                    "url": "{{baseUrl}}/api/v2/auth/login"
-                  },
-                  "status": "Unauthorized",
-                  "code": 401,
-                  "_postman_previewlanguage": "text",
-                  "header": [
-                    {
-                      "key": "Content-Type",
-                      "value": "text/plain"
-                    }
-                  ],
-                  "cookie": [],
-                  "responseTime": null,
-                  "body": ""
-                }
-              ]
-            },
             {
               "name": "Get_dsp_non_existent",
               "event": [
@@ -1206,9 +490,232 @@
           ],
           "_postman_id": "6b44ce4c-3321-417b-bc6a-577ad1a37396",
           "_postman_isSubFolder": true
+        },
+        {
+          "name": "Login_admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "8708e0f8-517f-477a-ab52-202bcca5c649",
+                "exec": [
+                  "//Status code",
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "",
+                  "//No error message",
+                  "pm.test(\"No error message\", function () {",
+                  "    pm.expect(pm.response.text()).to.not.include(\"Invalid email or password. Please, try again.\");",
+                  "});",
+                  "",
+                  "//Content",
+                  "pm.test(\"Contains: token, refreshToken, role\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(\"token\");",
+                  "    pm.expect(pm.response.text()).to.include(\"refreshToken\");",
+                  "    pm.expect(pm.response.text()).to.include(\"permissions\");",
+                  "});",
+                  "",
+                  "",
+                  "//Permissions",
+                  "pm.test(\"Role is Global Tenant Admin\", function () {",
+                  "pm.expect(pm.response.text()).to.include(\"\\\"DSP_WRITE\\\"\");",
+                  "pm.expect(pm.response.text()).to.include(\"\\\"DSP_READ\\\"\");",
+                  "});",
+                  "",
+                  "//Set token variable",
+                  "var jsonData = JSON.parse(responseBody);",
+                  "pm.environment.set(\"token\", jsonData.token);"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "b7ed3edf-dea0-455d-895d-a29416169123",
+                "exec": [
+                  "//Save current time before start",
+                  "pm.environment.set(\"startTimestamp\", (new Date()).toISOString());"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "bffacc70-2eeb-4495-b731-4c901122a7e3",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"admin@admin.com\",\n    \"password\": \"7895123\"\n}",
+              "options": {
+                "raw": {}
+              }
+            },
+            "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/auth/login"
+          },
+          "response": [
+            {
+              "id": "07252e90-4ddd-49ae-a6f7-37e897ced8f5",
+              "name": "Not Found",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\": \"<string>\",\n    \"password\": \"<string>\"\n}"
+                },
+                "url": "{{baseUrl}}/api/v2/auth/login"
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "2555799f-bced-4c4c-b59e-f70f2f7af28d",
+              "name": "OK",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\": \"<string>\",\n    \"password\": \"<string>\"\n}"
+                },
+                "url": "{{baseUrl}}/api/v2/auth/login"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "4992eb5b-cff0-4721-a5bd-63a4999b561f",
+              "name": "Created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\": \"<string>\",\n    \"password\": \"<string>\"\n}"
+                },
+                "url": "{{baseUrl}}/api/v2/auth/login"
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "5fd9d4be-f38d-4cbb-aa86-97866b0d894e",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\": \"<string>\",\n    \"password\": \"<string>\"\n}"
+                },
+                "url": "{{baseUrl}}/api/v2/auth/login"
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "b25471d7-7431-4022-9802-c594b8b83edd",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\": \"<string>\",\n    \"password\": \"<string>\"\n}"
+                },
+                "url": "{{baseUrl}}/api/v2/auth/login"
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            }
+          ]
         }
       ],
-      "_postman_id": "62d89a2a-9fd0-448f-8e0e-32a51c86491e"
+      "_postman_id": "62d89a2a-9fd0-448f-8e0e-32a51c86491e",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "9323ac7a-a5d6-4f87-8cc2-46912286dcb6",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "60c8c032-1320-411e-afa1-89259dc596e3",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
     }
   ]
 }
