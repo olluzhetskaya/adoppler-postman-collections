@@ -9,12 +9,6 @@
       "name": "Demand Partner (Extended)",
       "item": [
         {
-          "name": "Negative",
-          "item": [],
-          "_postman_id": "6b44ce4c-3321-417b-bc6a-577ad1a37396",
-          "_postman_isSubFolder": true
-        },
-        {
           "name": "Login_admin",
           "event": [
             {
