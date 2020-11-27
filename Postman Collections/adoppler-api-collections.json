@@ -10,157 +10,7 @@
       "item": [
         {
           "name": "Negative",
-          "item": [
-            {
-              "name": "Create_dsp_incorrect_oRTB_version",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "id": "0d8f24ad-fad1-40a3-bbbf-37c194b5128e",
-                    "exec": [
-                      "//Status code",
-                      "tests[\"Status code is 400\"] = responseCode.code === 400;",
-                      "",
-                      "//List of supported versions",
-                      "pm.test(\"Contains: name\", function () {",
-                      "    pm.expect(pm.response.text()).to.include(\"[V2_3, V2_4, V2_5, V2_5_OATH, V2_5_BIDSWITCH, V2_4_XANDR, V2_3_SPOTX, V2_5_MEDIAFUSE, V2_5_ADOPPLER]\");",
-                      "});"
-                    ],
-                    "type": "text/javascript"
-                  }
-                },
-                {
-                  "listen": "prerequest",
-                  "script": {
-                    "id": "9e5adf43-afd6-43f0-904b-61705a3f2e7d",
-                    "exec": [
-                      ""
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "_postman_id": "f80fac29-f478-450e-9a6e-5ba2273e8dfa",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "auth": {
-                  "type": "noauth"
-                },
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "X-Authorization",
-                    "value": "Bearer {{token}}"
-                  },
-                  {
-                    "key": "Content-Type",
-                    "name": "Content-Type",
-                    "type": "text",
-                    "value": "application/json"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"id\": null,\n  \"name\": \"Postman: RTB {{currentSprint}} {{startTimestamp}}\",\n  \"bidfloor\": \"100\",\n  \"compression\": true,\n  \"contacts\": {\n    \"country\": \"BY\",\n    \"email\": \"so@adoppler.com\",\n    \"phone\": \"+375291111111\",\n    \"responsiblePerson\": \"QA QA\",\n    \"skype\": \"qa_qa\"\n  },\n  \"share\": \"10\",\n  \"dynamicRps\": true,\n  \"embedded\": false,\n  \"externalId\": null,\n  \"ortbVersion\": \"V3_0\",\n  \"price\": null,\n  \"privateAuction\": false,\n  \"requestFilter\": {\n    \"adTypes\": [\n      \"BANNER\",\n      \"VIDEO\"\n    ],\n    \"carriers\": [],\n    \"carriersAllow\": true,\n    \"countries\": [\n      \"BY\",\n      \"BE\"\n    ],\n    \"devices\": [\n      \"CONNECTED_DEVICE\",\n      \"CONNECTED_TV\",\n      \"MOBILE_TABLET\",\n      \"PERSONAL_COMPUTER\",\n      \"PHONE\",\n      \"SET_TOP_BOX\",\n      \"TABLET\"\n    ],\n    \"domains\": [],\n    \"domainsAllow\": true,\n    \"oses\": [\n      \"ANDROID\",\n      \"I_OS\",\n      \"LINUX\",\n      \"MAC_OS\",\n      \"OTHER\",\n      \"WINDOWS\"\n    ],\n\t\"sizes\": [\n      {\n        \"width\": 576,\n        \"height\": 1024\n      },\n      {\n        \"width\": 960,\n        \"height\": 1280\n      },\n      {\n        \"width\": 1024,\n        \"height\": 576\n      },\n      {\n        \"width\": 1280,\n        \"height\": 960\n      },\n      {\n        \"width\": 250,\n        \"height\": 250\n      },\n      {\n        \"width\": 120,\n        \"height\": 60\n      },\n      {\n        \"width\": 88,\n        \"height\": 31\n      },\n      {\n        \"width\": 1080,\n        \"height\": 1920\n      },\n      {\n        \"width\": 336,\n        \"height\": 280\n      },\n      {\n        \"width\": 300,\n        \"height\": 250\n      },\n      {\n        \"width\": 1280,\n        \"height\": 720\n      },\n      {\n        \"width\": 970,\n        \"height\": 90\n      },\n      {\n        \"width\": 400,\n        \"height\": 225\n      },\n      {\n        \"width\": 800,\n        \"height\": 250\n      },\n      {\n        \"width\": 640,\n        \"height\": 480\n      },\n      {\n        \"width\": 480,\n        \"height\": 320\n      },\n      {\n        \"width\": 1440,\n        \"height\": 1920\n      },\n      {\n        \"width\": 120,\n        \"height\": 600\n      },\n      {\n        \"width\": 1800,\n        \"height\": 1000\n      },\n      {\n        \"width\": 120,\n        \"height\": 90\n      },\n      {\n        \"width\": 180,\n        \"height\": 150\n      },\n      {\n        \"width\": 640,\n        \"height\": 360\n      },\n      {\n        \"width\": 468,\n        \"height\": 60\n      },\n      {\n        \"width\": 970,\n        \"height\": 500\n      },\n      {\n        \"width\": 300,\n        \"height\": 1050\n      },\n      {\n        \"width\": 970,\n        \"height\": 250\n      },\n      {\n        \"width\": 320,\n        \"height\": 50\n      },\n      {\n        \"width\": 360,\n        \"height\": 480\n      },\n      {\n        \"width\": 120,\n        \"height\": 240\n      },\n      {\n        \"width\": 768,\n        \"height\": 1024\n      },\n      {\n        \"width\": 1024,\n        \"height\": 768\n      },\n      {\n        \"width\": 728,\n        \"height\": 90\n      },\n      {\n        \"width\": 300,\n        \"height\": 50\n      },\n      {\n        \"width\": 480,\n        \"height\": 360\n      },\n      {\n        \"width\": 1030,\n        \"height\": 590\n      },\n      {\n        \"width\": 720,\n        \"height\": 480\n      },\n      {\n        \"width\": 270,\n        \"height\": 480\n      },\n      {\n        \"width\": 234,\n        \"height\": 60\n      },\n      {\n        \"width\": 360,\n        \"height\": 640\n      },\n      {\n        \"width\": 300,\n        \"height\": 200\n      },\n      {\n        \"width\": 400,\n        \"height\": 300\n      },\n      {\n        \"width\": 125,\n        \"height\": 125\n      },\n      {\n        \"width\": 480,\n        \"height\": 640\n      },\n      {\n        \"width\": 240,\n        \"height\": 400\n      },\n      {\n        \"width\": 320,\n        \"height\": 480\n      },\n      {\n        \"width\": 1920,\n        \"height\": 1440\n      },\n      {\n        \"width\": 1920,\n        \"height\": 800\n      },\n      {\n        \"width\": 320,\n        \"height\": 100\n      },\n      {\n        \"width\": 300,\n        \"height\": 600\n      },\n      {\n        \"width\": 480,\n        \"height\": 270\n      },\n      {\n        \"width\": 320,\n        \"height\": 240\n      },\n      {\n        \"width\": 720,\n        \"height\": 1280\n      },\n      {\n        \"width\": 1920,\n        \"height\": 1200\n      },\n      {\n        \"width\": 1920,\n        \"height\": 1080\n      },\n      {\n        \"width\": 160,\n        \"height\": 600\n      },\n      {\n        \"width\": 800,\n        \"height\": 600\n      }\n    ],\n    \"ssps\": []\n  },\n  \"requireIfa\": true,\n  \"rpsLimit\": \"1000\",\n  \"status\": \"INACTIVE\",\n  \"type\": \"RTB\",\n  \"url\": \"http://ads-test3.env.geomotiv.com:0000\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/dsps"
-              },
-              "response": [
-                {
-                  "id": "1dfb0271-4cdc-48ba-9478-8b67c60d412e",
-                  "name": "Unauthorized",
-                  "originalRequest": {
-                    "method": "GET",
-                    "header": [],
-                    "url": "{{baseUrl}}/api/v2/countries"
-                  },
-                  "status": "Unauthorized",
-                  "code": 401,
-                  "_postman_previewlanguage": "text",
-                  "header": [
-                    {
-                      "key": "Content-Type",
-                      "value": "text/plain"
-                    }
-                  ],
-                  "cookie": [],
-                  "responseTime": null,
-                  "body": ""
-                },
-                {
-                  "id": "6c999bd3-1313-4a66-980d-566b5849b56c",
-                  "name": "Forbidden",
-                  "originalRequest": {
-                    "method": "GET",
-                    "header": [],
-                    "url": "{{baseUrl}}/api/v2/countries"
-                  },
-                  "status": "Forbidden",
-                  "code": 403,
-                  "_postman_previewlanguage": "text",
-                  "header": [
-                    {
-                      "key": "Content-Type",
-                      "value": "text/plain"
-                    }
-                  ],
-                  "cookie": [],
-                  "responseTime": null,
-                  "body": ""
-                },
-                {
-                  "id": "a2145050-d809-4b5b-9fc1-4ce5b996128f",
-                  "name": "OK",
-                  "originalRequest": {
-                    "method": "GET",
-                    "header": [],
-                    "url": "{{baseUrl}}/api/v2/countries"
-                  },
-                  "status": "OK",
-                  "code": 200,
-                  "_postman_previewlanguage": "text",
-                  "header": [
-                    {
-                      "key": "Content-Type",
-                      "value": "*/*"
-                    }
-                  ],
-                  "cookie": [],
-                  "responseTime": null,
-                  "body": ""
-                },
-                {
-                  "id": "c306b1ea-b286-483d-9add-954ebc7aca06",
-                  "name": "Not Found",
-                  "originalRequest": {
-                    "method": "GET",
-                    "header": [],
-                    "url": "{{baseUrl}}/api/v2/countries"
-                  },
-                  "status": "Not Found",
-                  "code": 404,
-                  "_postman_previewlanguage": "text",
-                  "header": [
-                    {
-                      "key": "Content-Type",
-                      "value": "text/plain"
-                    }
-                  ],
-                  "cookie": [],
-                  "responseTime": null,
-                  "body": ""
-                }
-              ]
-            }
-          ],
+          "item": [],
           "_postman_id": "6b44ce4c-3321-417b-bc6a-577ad1a37396",
           "_postman_isSubFolder": true
         },
@@ -691,6 +541,155 @@
             "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/dsps/{{dspId}}"
           },
           "response": []
+        },
+        {
+          "name": "Create_dsp_incorrect_oRTB_version",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "0d8f24ad-fad1-40a3-bbbf-37c194b5128e",
+                "exec": [
+                  "//Status code",
+                  "tests[\"Status code is 400\"] = responseCode.code === 400;",
+                  "",
+                  "//List of supported versions",
+                  "pm.test(\"Contains: name\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(\"[V2_3, V2_4, V2_5, V2_5_OATH, V2_5_BIDSWITCH, V2_4_XANDR, V2_3_SPOTX, V2_5_MEDIAFUSE, V2_5_ADOPPLER]\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "9e5adf43-afd6-43f0-904b-61705a3f2e7d",
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "f80fac29-f478-450e-9a6e-5ba2273e8dfa",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": null,\n  \"name\": \"Postman: RTB {{currentSprint}} {{startTimestamp}}\",\n  \"bidfloor\": \"100\",\n  \"compression\": true,\n  \"contacts\": {\n    \"country\": \"BY\",\n    \"email\": \"so@adoppler.com\",\n    \"phone\": \"+375291111111\",\n    \"responsiblePerson\": \"QA QA\",\n    \"skype\": \"qa_qa\"\n  },\n  \"share\": \"10\",\n  \"dynamicRps\": true,\n  \"embedded\": false,\n  \"externalId\": null,\n  \"ortbVersion\": \"V3_0\",\n  \"price\": null,\n  \"privateAuction\": false,\n  \"requestFilter\": {\n    \"adTypes\": [\n      \"BANNER\",\n      \"VIDEO\"\n    ],\n    \"carriers\": [],\n    \"carriersAllow\": true,\n    \"countries\": [\n      \"BY\",\n      \"BE\"\n    ],\n    \"devices\": [\n      \"CONNECTED_DEVICE\",\n      \"CONNECTED_TV\",\n      \"MOBILE_TABLET\",\n      \"PERSONAL_COMPUTER\",\n      \"PHONE\",\n      \"SET_TOP_BOX\",\n      \"TABLET\"\n    ],\n    \"domains\": [],\n    \"domainsAllow\": true,\n    \"oses\": [\n      \"ANDROID\",\n      \"I_OS\",\n      \"LINUX\",\n      \"MAC_OS\",\n      \"OTHER\",\n      \"WINDOWS\"\n    ],\n\t\"sizes\": [\n      {\n        \"width\": 576,\n        \"height\": 1024\n      },\n      {\n        \"width\": 960,\n        \"height\": 1280\n      },\n      {\n        \"width\": 1024,\n        \"height\": 576\n      },\n      {\n        \"width\": 1280,\n        \"height\": 960\n      },\n      {\n        \"width\": 250,\n        \"height\": 250\n      },\n      {\n        \"width\": 120,\n        \"height\": 60\n      },\n      {\n        \"width\": 88,\n        \"height\": 31\n      },\n      {\n        \"width\": 1080,\n        \"height\": 1920\n      },\n      {\n        \"width\": 336,\n        \"height\": 280\n      },\n      {\n        \"width\": 300,\n        \"height\": 250\n      },\n      {\n        \"width\": 1280,\n        \"height\": 720\n      },\n      {\n        \"width\": 970,\n        \"height\": 90\n      },\n      {\n        \"width\": 400,\n        \"height\": 225\n      },\n      {\n        \"width\": 800,\n        \"height\": 250\n      },\n      {\n        \"width\": 640,\n        \"height\": 480\n      },\n      {\n        \"width\": 480,\n        \"height\": 320\n      },\n      {\n        \"width\": 1440,\n        \"height\": 1920\n      },\n      {\n        \"width\": 120,\n        \"height\": 600\n      },\n      {\n        \"width\": 1800,\n        \"height\": 1000\n      },\n      {\n        \"width\": 120,\n        \"height\": 90\n      },\n      {\n        \"width\": 180,\n        \"height\": 150\n      },\n      {\n        \"width\": 640,\n        \"height\": 360\n      },\n      {\n        \"width\": 468,\n        \"height\": 60\n      },\n      {\n        \"width\": 970,\n        \"height\": 500\n      },\n      {\n        \"width\": 300,\n        \"height\": 1050\n      },\n      {\n        \"width\": 970,\n        \"height\": 250\n      },\n      {\n        \"width\": 320,\n        \"height\": 50\n      },\n      {\n        \"width\": 360,\n        \"height\": 480\n      },\n      {\n        \"width\": 120,\n        \"height\": 240\n      },\n      {\n        \"width\": 768,\n        \"height\": 1024\n      },\n      {\n        \"width\": 1024,\n        \"height\": 768\n      },\n      {\n        \"width\": 728,\n        \"height\": 90\n      },\n      {\n        \"width\": 300,\n        \"height\": 50\n      },\n      {\n        \"width\": 480,\n        \"height\": 360\n      },\n      {\n        \"width\": 1030,\n        \"height\": 590\n      },\n      {\n        \"width\": 720,\n        \"height\": 480\n      },\n      {\n        \"width\": 270,\n        \"height\": 480\n      },\n      {\n        \"width\": 234,\n        \"height\": 60\n      },\n      {\n        \"width\": 360,\n        \"height\": 640\n      },\n      {\n        \"width\": 300,\n        \"height\": 200\n      },\n      {\n        \"width\": 400,\n        \"height\": 300\n      },\n      {\n        \"width\": 125,\n        \"height\": 125\n      },\n      {\n        \"width\": 480,\n        \"height\": 640\n      },\n      {\n        \"width\": 240,\n        \"height\": 400\n      },\n      {\n        \"width\": 320,\n        \"height\": 480\n      },\n      {\n        \"width\": 1920,\n        \"height\": 1440\n      },\n      {\n        \"width\": 1920,\n        \"height\": 800\n      },\n      {\n        \"width\": 320,\n        \"height\": 100\n      },\n      {\n        \"width\": 300,\n        \"height\": 600\n      },\n      {\n        \"width\": 480,\n        \"height\": 270\n      },\n      {\n        \"width\": 320,\n        \"height\": 240\n      },\n      {\n        \"width\": 720,\n        \"height\": 1280\n      },\n      {\n        \"width\": 1920,\n        \"height\": 1200\n      },\n      {\n        \"width\": 1920,\n        \"height\": 1080\n      },\n      {\n        \"width\": 160,\n        \"height\": 600\n      },\n      {\n        \"width\": 800,\n        \"height\": 600\n      }\n    ],\n    \"ssps\": []\n  },\n  \"requireIfa\": true,\n  \"rpsLimit\": \"1000\",\n  \"status\": \"INACTIVE\",\n  \"type\": \"RTB\",\n  \"url\": \"http://ads-test3.env.geomotiv.com:0000\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/dsps"
+          },
+          "response": [
+            {
+              "id": "1dfb0271-4cdc-48ba-9478-8b67c60d412e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/api/v2/countries"
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "6c999bd3-1313-4a66-980d-566b5849b56c",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/api/v2/countries"
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "a2145050-d809-4b5b-9fc1-4ce5b996128f",
+              "name": "OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/api/v2/countries"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "c306b1ea-b286-483d-9add-954ebc7aca06",
+              "name": "Not Found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/api/v2/countries"
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            }
+          ]
         }
       ],
       "_postman_id": "62d89a2a-9fd0-448f-8e0e-32a51c86491e",
