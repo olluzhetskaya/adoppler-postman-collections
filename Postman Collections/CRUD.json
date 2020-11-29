@@ -1,0 +1,783 @@
+{
+  "info": {
+    "_postman_id": "27e87750-021f-42ba-84b1-a302d20fe12a",
+    "name": "01.2 CI (CRUD)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Demand Partner (CRUD)",
+      "item": [
+        {
+          "name": "Login_admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "383c3b33-db0c-4db4-8d6b-33e1e552a7c7",
+                "exec": [
+                  "//Status code",
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "",
+                  "//No error message",
+                  "pm.test(\"No error message\", function () {",
+                  "    pm.expect(pm.response.text()).to.not.include(\"Invalid email or password. Please, try again.\");",
+                  "});",
+                  "",
+                  "//Content",
+                  "pm.test(\"Contains: token, refreshToken, role\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(\"token\");",
+                  "    pm.expect(pm.response.text()).to.include(\"refreshToken\");",
+                  "    pm.expect(pm.response.text()).to.include(\"permissions\");",
+                  "});",
+                  "",
+                  "",
+                  "//Permissions",
+                  "pm.test(\"Role is Global Tenant Admin\", function () {",
+                  "pm.expect(pm.response.text()).to.include(\"\\\"DSP_WRITE\\\"\");",
+                  "pm.expect(pm.response.text()).to.include(\"\\\"DSP_READ\\\"\");",
+                  "});",
+                  "",
+                  "//Set token variable",
+                  "var jsonData = JSON.parse(responseBody);",
+                  "pm.environment.set(\"token\", jsonData.token);"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "359e8ebb-f1ca-42f2-8702-d50dd47e28ca",
+                "exec": [
+                  "//Save current time before start",
+                  "pm.environment.set(\"startTimestamp\", (new Date()).toISOString());"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "2198bcc8-a527-4372-aeaf-8ef3624e06ee",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"admin@admin.com\",\n    \"password\": \"7895123\"\n}",
+              "options": {
+                "raw": {}
+              }
+            },
+            "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/auth/login"
+          },
+          "response": [
+            {
+              "id": "5947c994-19f9-4e84-b099-7e2877c42197",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\": \"<string>\",\n    \"password\": \"<string>\"\n}"
+                },
+                "url": "{{baseUrl}}/api/v2/auth/login"
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "5aeb699b-7450-45b5-ad30-f662978a3da2",
+              "name": "OK",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\": \"<string>\",\n    \"password\": \"<string>\"\n}"
+                },
+                "url": "{{baseUrl}}/api/v2/auth/login"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "c2bcf0e8-8248-4a5f-a379-8127fab598e0",
+              "name": "Not Found",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\": \"<string>\",\n    \"password\": \"<string>\"\n}"
+                },
+                "url": "{{baseUrl}}/api/v2/auth/login"
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "cd43a385-346b-46bb-ace8-30fb175016ab",
+              "name": "Created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\": \"<string>\",\n    \"password\": \"<string>\"\n}"
+                },
+                "url": "{{baseUrl}}/api/v2/auth/login"
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "d788d38d-a8eb-49a8-aca6-702248f5737c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\": \"<string>\",\n    \"password\": \"<string>\"\n}"
+                },
+                "url": "{{baseUrl}}/api/v2/auth/login"
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "Create_dsp_RTB",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "57d1c99c-0732-4fb3-b5ce-d7e92b6c1bc3",
+                "exec": [
+                  "//Status code",
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "",
+                  "//Content",
+                  "pm.test(\"Contains: id, name\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"id\\\"\");",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"externalId\\\"\");",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"name\\\":\\\"Postman: Demand Partner\");",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"status\\\":\\\"ACTIVE\");",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"url\\\":\\\"http://qa.com\");",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"ortbVersion\\\":\\\"V2_3\");",
+                  "});",
+                  "//Headers",
+                  "pm.test(\"Check Headers\", function () {",
+                  "    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json;charset=utf-8');",
+                  "    pm.expect(pm.response.headers.get('Connection')).to.eql('keep-alive');",
+                  "    pm.expect(pm.response.headers.get('Cache-Control')).to.eql('no-cache, no-store, max-age=0, must-revalidate');",
+                  "    pm.expect(pm.response.headers.get('X-Content-Type-Options')).to.eql('nosniff');",
+                  "    pm.expect(pm.response.headers.get('X-XSS-Protection')).to.eql('1; mode=block');",
+                  "    pm.expect(pm.response.headers.get('X-Frame-Options')).to.eql('DENY');    ",
+                  "});",
+                  "",
+                  "//Set token variable",
+                  "var jsonData = JSON.parse(responseBody);",
+                  "pm.environment.set(\"dspId\", jsonData.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "20f731d9-2366-4e75-bc37-4bc133b149a1",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Postman: Demand Partner {{currentSprint}} {{startTimestamp}}\",\n  \"auctionMode\": \"FIRST_PRICE\",\n  \"contacts\": {},\n  \"ortbVersion\": \"V2_3\",\n  \"requestFilter\": {\n    \"adTypes\": [],\n     \"countries\": [],\n    \"sizes\": [],\n    \"ssps\": {\n      \"allow\": true,\n      \"values\": []\n    }\n  },\n  \"status\": \"ACTIVE\",\n  \"type\": \"RTB\",\n  \"url\": \"http://qa.com\"\n}",
+              "options": {
+                "raw": {}
+              }
+            },
+            "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/dsps"
+          },
+          "response": []
+        },
+        {
+          "name": "Get_dsp_RTB",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "d1c3aab8-746f-4075-b8c2-13d50249d30d",
+                "exec": [
+                  "//Status code",
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "",
+                  "//Content",
+                  "pm.test(\"Contains: id, name\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(pm.environment.get(\"dspId\"));",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"externalId\\\"\");",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"name\\\":\\\"Postman: Demand Partner\");",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"status\\\":\\\"ACTIVE\");",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"url\\\":\\\"http://qa.com\");",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"ortbVersion\\\":\\\"V2_3\");",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"contacts\\\"\");",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"type\\\":\\\"RTB\");",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"auctionMode\\\":\\\"FIRST_PRICE\");",
+                  "",
+                  "    //\"price: 0\" has been passed and \"price: 0E-8\" recieved. Is it OK?",
+                  "    //pm.expect(pm.response.text()).to.include(\"\\\"price\\\":\\\"0E-8\");",
+                  "",
+                  "    //UPD Price is null already, 0E-8 value returns for the \"share\" field ",
+                  "",
+                  "});",
+                  "//Headers",
+                  "pm.test(\"Check Headers\", function () {",
+                  "    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json;charset=utf-8');",
+                  "    pm.expect(pm.response.headers.get('Connection')).to.eql('keep-alive');",
+                  "    pm.expect(pm.response.headers.get('Cache-Control')).to.eql('no-cache, no-store, max-age=0, must-revalidate');",
+                  "    pm.expect(pm.response.headers.get('X-Content-Type-Options')).to.eql('nosniff');",
+                  "    pm.expect(pm.response.headers.get('X-XSS-Protection')).to.eql('1; mode=block');",
+                  "    pm.expect(pm.response.headers.get('X-Frame-Options')).to.eql('DENY');    ",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "d132dd2e-cae7-455e-979c-7a7be9c7d95d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Authorization",
+                "type": "text",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/dsps/{{dspId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Update_dsp_ortbVersion",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "9176f52a-a28f-46ff-982f-1bc54951aa03",
+                "exec": [
+                  "//Status code",
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "",
+                  "// Type",
+                  "pm.test(\"Type: TAG\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(pm.environment.get(\"dspId\"));",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"type\\\":\\\"RTB\");",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"ortbVersion\\\":\\\"V2_5_MEDIAFUSE\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "a49a06ec-ff53-485b-83ac-8d4ef9533bbc",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Postman: Demand Partner {{currentSprint}} {{startTimestamp}}\",\n  \"auctionMode\": \"FIRST_PRICE\",\n  \"contacts\": {},\n  \"ortbVersion\": \"V2_5_MEDIAFUSE\",\n  \"requestFilter\": {\n    \"adTypes\": [],\n     \"countries\": [],\n    \"sizes\": [],\n    \"ssps\": {\n      \"allow\": true,\n      \"values\": []\n    }\n  },\n  \"status\": \"INACTIVE\",\n  \"type\": \"RTB\",\n  \"url\": \"http://qa.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/dsps/{{dspId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Update_dsp_auctionMode",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "3f656e87-1edd-42f8-9611-7dcafcd60bd8",
+                "exec": [
+                  "//Status code",
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "",
+                  "// Type",
+                  "pm.test(\"Type: TAG\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(pm.environment.get(\"dspId\"));",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"type\\\":\\\"RTB\");",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"auctionMode\\\":\\\"SECOND_PRICE\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "d0d947f2-12e8-423e-95e9-e10b49f79d45",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Postman: Demand Partner {{currentSprint}} {{startTimestamp}}\",\n  \"auctionMode\": \"SECOND_PRICE\",\n  \"contacts\": {},\n  \"ortbVersion\": \"V2_3\",\n  \"requestFilter\": {\n    \"adTypes\": [],\n     \"countries\": [],\n    \"sizes\": [],\n    \"ssps\": {\n      \"allow\": true,\n      \"values\": []\n    }\n  },\n  \"status\": \"INACTIVE\",\n  \"type\": \"RTB\",\n  \"url\": \"http://qa.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/dsps/{{dspId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Update_dsp_without_id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "fbd18382-1641-42b6-acce-a51f5dcea612",
+                "exec": [
+                  "//Status code",
+                  "tests[\"Status code is 500\"] = responseCode.code === 500;",
+                  "",
+                  "// Type",
+                  "pm.test(\"Type: TAG\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"Request method 'PUT' not supported\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "75eee599-3232-4dc1-98f0-9ab7f56f4c24",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Postman: Demand Partner {{currentSprint}} {{startTimestamp}}\",\n  \"auctionMode\": \"SECOND_PRICE\",\n  \"contacts\": {},\n  \"ortbVersion\": \"V2_3\",\n  \"requestFilter\": {\n    \"adTypes\": [],\n     \"countries\": [],\n    \"sizes\": [],\n    \"ssps\": {\n      \"allow\": true,\n      \"values\": []\n    }\n  },\n  \"status\": \"INACTIVE\",\n  \"type\": \"RTB\",\n  \"url\": \"http://qa.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/dsps"
+          },
+          "response": []
+        },
+        {
+          "name": "Create_dsp_required_name",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "e16b1297-b807-4566-afb7-e76d6050c0c1",
+                "exec": [
+                  "//Status code",
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "",
+                  "// Type",
+                  "pm.test(\"Response:\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"name\\\":null\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "c8f1b163-49f1-449b-aa31-683d62b1140d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"auctionMode\": \"SECOND_PRICE\",\n  \"contacts\": {},\n  \"ortbVersion\": \"V2_3\",\n  \"requestFilter\": {\n    \"adTypes\": [],\n     \"countries\": [],\n    \"sizes\": [],\n    \"ssps\": {\n      \"allow\": true,\n      \"values\": []\n    }\n  },\n  \"status\": \"INACTIVE\",\n  \"type\": \"RTB\",\n  \"url\": \"http://qa.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/dsps"
+          },
+          "response": []
+        },
+        {
+          "name": "Create_dsp_min_lengh_name_validation",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "afc4a5dc-9290-4067-a51f-c11e686978ff",
+                "exec": [
+                  "//Status code",
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "",
+                  "// Type",
+                  "pm.test(\"Response:\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"name\\\":\\\"P\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "4fabff95-8f63-445b-bb7d-83298d10695b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Authorization",
+                "type": "text",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"P\",\n  \"auctionMode\": \"SECOND_PRICE\",\n  \"contacts\": {},\n  \"ortbVersion\": \"V2_3\",\n  \"requestFilter\": {\n    \"adTypes\": [],\n     \"countries\": [],\n    \"sizes\": [],\n    \"ssps\": {\n      \"allow\": true,\n      \"values\": []\n    }\n  },\n  \"status\": \"INACTIVE\",\n  \"type\": \"RTB\",\n  \"url\": \"http://qa.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/dsps"
+          },
+          "response": []
+        },
+        {
+          "name": "Create_dsp_type_TAG",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "329fad32-8e23-4729-ac9d-f08809223506",
+                "exec": [
+                  "//Status code",
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "",
+                  "// Type",
+                  "pm.test(\"Type: TAG\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"type\\\":\\\"TAG\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "efa6dced-1bba-463d-b9b0-64a146ee9ab0",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Postman: Demand Partner {{currentSprint}} {{startTimestamp}}\",\n  \"auctionMode\": \"FIRST_PRICE\",\n  \"contacts\": {},\n  \"price\": 0,\n  \"ortbVersion\": \"V2_3\",\n  \"requestFilter\": {\n    \"adTypes\": [],\n     \"countries\": [],\n    \"sizes\": [],\n    \"ssps\": {\n      \"allow\": true,\n      \"values\": []\n    }\n  },\n  \"status\": \"INACTIVE\",\n  \"type\": \"TAG\",\n  \"url\": \"http://qa.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/dsps"
+          },
+          "response": []
+        },
+        {
+          "name": "Create_dsp_tag_with_null_price",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "422c214c-8495-496e-84ac-a36bdeb19e4b",
+                "exec": [
+                  "//Status code",
+                  "tests[\"Status code is 400\"] = responseCode.code === 400;",
+                  "",
+                  "//No error message",
+                  "pm.test(\"No error message\", function () {",
+                  "    pm.expect(pm.response.text()).to.not.include(\"Invalid email or password. Please, try again.\");",
+                  "});",
+                  "",
+                  "//Content",
+                  "pm.test(\"Error message contains:\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(\"must not be null\");",
+                  "});",
+                  "",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "0231a984-b1f3-4f26-b752-5900e1d1425b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Postman: Demand Partner {{currentSprint}} {{startTimestamp}}\",\n  \"auctionMode\": \"FIRST_PRICE\",\n  \"bidfloor\": 0,\n  \"compression\": true,\n  \"contacts\": {\n    \"country\": \"BY\",\n    \"email\": \"so@adoppler.com\",\n    \"phone\": \"+375291111111\",\n    \"responsiblePerson\": \"QA QA\",\n    \"skype\": \"qa_qa\"\n  },\n \"cookieSyncBidirect\": false,\n  \"cookieSyncEnabled\": false,\n  \"cookieSyncRedirectParam\": null,\n  \"cookieSyncUrl\": null,\n  \"cookieSyncUserMacro\": null,\n  \"defaultAppBundleMapping\": \"string\",\n  \"dynamicRps\": true,\n  \"embedded\": true,\n  \"externalId\": null,\n  \"id\": 0,\n  \"ortbVersion\": \"V2_3\",\n  \"price\": null,\n  \"privateAuction\": true,\n  \"requestFilter\": {\n    \"adTypes\": [\n      \"BANNER\"\n    ],\n    \"carriersAllow\": true,\n     \"countries\": [\n      \"BY\",\n      \"BE\"\n    ],\n    \"devices\": [\n      \"MOBILE_TABLET\"\n    ],\n    \"inventoryTypes\": {\n      \"allow\": true,\n      \"values\": [\n        \"DESKTOP_WEB\"\n      ]\n    },\n    \"oses\": [\n      \"ANDROID\"\n    ],\n    \"sizes\": [\n      {\n        \"width\": 576,\n        \"height\": 1024\n      }\n    ],\n    \"ssps\": {\n      \"allow\": true,\n      \"values\": [\n        0\n      ]\n    }\n  },\n  \"requireIfa\": true,\n  \"rpsLimit\": 0,\n  \"share\": 0,\n  \"sharedForAll\": true,\n  \"status\": \"ACTIVE\",\n  \"type\": \"TAG\",\n  \"url\": \"http://qa.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/dsps"
+          },
+          "response": []
+        },
+        {
+          "name": "Update_dsp_status_INACTIVE",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "5f28961b-117d-4a7d-8285-04cb9b699501",
+                "exec": [
+                  "//Status code",
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "",
+                  "//No error message",
+                  "pm.test(\"No error message\", function () {",
+                  "    pm.expect(pm.response.text()).to.not.include(\"Invalid email or password. Please, try again.\");",
+                  "});",
+                  "",
+                  "// Content",
+                  "pm.test(\"Contains: id, status: INACTIVE\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(pm.environment.get(\"dspId\"));",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"externalId\\\"\");",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"name\\\":\\\"Postman: Demand Partner\");",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"status\\\":\\\"INACTIVE\");",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"url\\\":\\\"http://qa.com\");",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"ortbVersion\\\":\\\"V2_3\");",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"contacts\\\"\");",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"auctionMode\\\":\\\"FIRST_PRICE\");",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"price\\\":null\");",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"bidfloor\\\":null\");",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"type\\\":\\\"RTB\");",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"requestFilter\\\"\");",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"ssps\\\"\");",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"inventoryTypes\\\"\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "a24b5e2f-57ce-4b10-a033-3ad932ed5fee",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Postman: Demand Partner {{currentSprint}} {{startTimestamp}}\",\n  \"auctionMode\": \"FIRST_PRICE\",\n  \"bidfloor\": 0,\n  \"compression\": true,\n  \"contacts\": {\n    \"country\": \"BY\",\n    \"email\": \"so@adoppler.com\",\n    \"phone\": \"+375291111111\",\n    \"responsiblePerson\": \"QA QA\",\n    \"skype\": \"qa_qa\"\n  },\n \"cookieSyncBidirect\": false,\n  \"cookieSyncEnabled\": false,\n  \"cookieSyncRedirectParam\": null,\n  \"cookieSyncUrl\": null,\n  \"cookieSyncUserMacro\": null,\n  \"defaultAppBundleMapping\": \"string\",\n  \"dynamicRps\": true,\n  \"embedded\": true,\n  \"externalId\": null,\n  \"id\": 0,\n  \"ortbVersion\": \"V2_3\",\n  \"price\": 0,\n  \"privateAuction\": true,\n  \"requestFilter\": {\n    \"adTypes\": [\n      \"BANNER\"\n    ],\n    \"carriersAllow\": true,\n     \"countries\": [\n      \"BY\",\n      \"BE\"\n    ],\n    \"devices\": [\n      \"MOBILE_TABLET\"\n    ],\n    \"inventoryTypes\": {\n      \"allow\": true,\n      \"values\": [\n        \"DESKTOP_WEB\"\n      ]\n    },\n    \"oses\": [\n      \"ANDROID\"\n    ],\n    \"sizes\": [\n      {\n        \"width\": 576,\n        \"height\": 1024\n      }\n    ],\n    \"ssps\": {\n      \"allow\": true,\n      \"values\": [\n        0\n      ]\n    }\n  },\n  \"requireIfa\": true,\n  \"rpsLimit\": 0,\n  \"share\": 0,\n  \"sharedForAll\": true,\n  \"status\": \"INACTIVE\",\n  \"type\": \"RTB\",\n  \"url\": \"http://qa.com\"\n}",
+              "options": {
+                "raw": {}
+              }
+            },
+            "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/dsps/{{dspId}}"
+          },
+          "response": []
+        }
+      ],
+      "_postman_id": "3fbfe05c-74cf-4ef2-98e5-1d302e1fa6e8"
+    }
+  ]
+}
