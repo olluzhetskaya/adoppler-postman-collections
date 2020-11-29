@@ -218,7 +218,7 @@
                 "id": "57d1c99c-0732-4fb3-b5ce-d7e92b6c1bc3",
                 "exec": [
                   "//Status code",
-                  "tests[\"Status code is 200\"] = responseCode.code === 400;",
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
                   "",
                   "//Content",
                   "pm.test(\"Contains: id, name\", function () {",
