@@ -2662,6 +2662,52 @@
           "response": []
         },
         {
+          "name": "Update_inventory_without_id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "955fb04b-f099-46b5-a478-0aab2a5cf07b",
+                "exec": [
+                  "//Status code",
+                  "tests[\"Status code is 500\"] = responseCode.code === 500;"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "d9c74386-ce42-45c0-9d60-d1a655ef25a3",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Authorization",
+                "type": "text",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"ssp\": 1977267,\n    \"name\": \"Postman: SiteApp Sprint 8 2020-11-30T15:56:21.803Z\",\n    \"type\": \"DESKTOP_WEB\",\n    \"domain\": null,\n    \"status\": \"INACTIVE\",\n    \"categories\": [],\n    \"blockedCategories\": [],\n    \"languages\": [],\n    \"group\": null,\n    \"dsps\": null,\n    \"thirdPartyId\": null,\n    \"sharedForAll\": false,\n    \"sharedSettings\": [],\n    \"appBundle\": null,\n    \"appStoreUrl\": null,\n    \"publisherInventories\": []\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/inventories"
+          },
+          "response": []
+        },
+        {
           "name": "Create_inventory_with_publisher_inventories",
           "event": [
             {
@@ -2789,58 +2835,6 @@
               }
             ],
             "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/inventories/12"
-          },
-          "response": []
-        },
-        {
-          "name": "Update_inventory_type Copy",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "id": "955fb04b-f099-46b5-a478-0aab2a5cf07b",
-                "exec": [
-                  "//Status code",
-                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                  "",
-                  "//Content",
-                  "pm.test(\"Contains\", function () {",
-                  "    pm.expect(pm.response.text()).to.include(pm.environment.get(\"siteAppId\"));",
-                  "    pm.expect(pm.response.text()).to.include(\"\\\"type\\\":\\\"DESKTOP_WEB\"); ",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "_postman_id": "d9c74386-ce42-45c0-9d60-d1a655ef25a3",
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
-          "request": {
-            "method": "PUT",
-            "header": [
-              {
-                "key": "X-Authorization",
-                "value": "Bearer {{token}}",
-                "type": "text"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "type": "text"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"ssp\": 1977267,\n    \"name\": \"Postman: SiteApp Sprint 8 2020-11-30T15:56:21.803Z\",\n    \"type\": \"DESKTOP_WEB\",\n    \"domain\": null,\n    \"status\": \"INACTIVE\",\n    \"categories\": [],\n    \"blockedCategories\": [],\n    \"languages\": [],\n    \"group\": null,\n    \"dsps\": null,\n    \"thirdPartyId\": null,\n    \"sharedForAll\": false,\n    \"sharedSettings\": [],\n    \"appBundle\": null,\n    \"appStoreUrl\": null,\n    \"publisherInventories\": []\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/inventories/{{siteAppId}}"
           },
           "response": []
         }
