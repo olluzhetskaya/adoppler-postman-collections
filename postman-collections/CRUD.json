@@ -1319,6 +1319,156 @@
           ]
         },
         {
+          "name": "Update_publisher_add_dsps_filter",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "b5f1281d-82a5-498f-a45a-b0c7ec264d1d",
+                "exec": [
+                  "//Status code",
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "",
+                  "//Content",
+                  "pm.test(\"Contains\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(\"{\\\"allow\\\":true,\\\"values\\\":[25445]}\");",
+                  "    ",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "4db6ee52-2a3e-4fb1-8a54-d82d4e520d16",
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "0795ceee-8aeb-4818-9705-0ee209022b9a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"type\": \"PUBLISHER\",\n    \"externalId\": \"71134469\",\n    \"status\": \"INACTIVE\",\n    \"name\": \"Postman: Publisher Sprint 8 2020-11-30T13:03:03.801Z\",\n    \"contacts\": {\n        \"responsiblePerson\": null,\n        \"email\": null,\n        \"phone\": null,\n        \"skype\": null,\n        \"country\": null\n    },\n    \"thirdPartyAdm\": \"\",\n    \"thirdPartyAdmEnabled\": false,\n     \"dsps\": {\n        \"allow\": true,\n        \"values\": [\n            25445\n        ]\n    },\n    \"requiredAdmResponse\": null,\n    \"domain\": \"qa.com\",\n    \"paymentTerm\": null,\n    \"paymentDetails\": \"\",\n    \"group\": null,\n    \"marginPercentage\": null,\n    \"tmax\": null,\n    \"sellerType\": \"INTERMEDIARY\",\n    \"adInsertion\": null,\n    \"thirdPartyId\": null,\n    \"xandrPlacementId\": null,\n    \"publisherExchanges\": [],\n    \"logoBase64\": null,\n    \"sharedForAll\": false,\n    \"sharedSettings\": [],\n    \"adsTxtEntry\": \"ads-test3.env.geomotiv.com, 71134469, DIRECT\",\n    \"blackLists\": {\n        \"ips\": null,\n        \"advDomains\": null,\n        \"appBundles\": null,\n        \"creativeIds\": null,\n        \"siteDomains\": null,\n        \"categories\": {\n            \"allow\": false,\n            \"values\": []\n        }\n    },\n    \"rtbVersion\": null,\n    \"publisherType\": \"TAG_ONLY\",\n    \"supplySources\": [],\n    \"thirdPartyImpressionBeacons\": [],\n    \"thirdPartyBeacons\": [],\n    \"adPod\": {\n        \"adPodDuration\": null,\n        \"adPodCount\": null,\n        \"adPodType\": null,\n        \"responseMode\": null,\n        \"adPodLayouts\": [],\n        \"serveIncomplete\": false,\n        \"fallbackMode\": false,\n        \"deduplicationTypes\": []\n    },\n    \"secured\": false,\n    \"fraudRiskThreshold\": null,\n    \"includePixalateBeacon\": null,\n    \"pixalateBeaconChance\": null\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/ssps/{{publisherId}}"
+          },
+          "response": [
+            {
+              "id": "17549eb1-d5a4-492b-9a0c-7c32f9fc1baa",
+              "name": "OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/api/v2/countries"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "b8018dd9-47b7-4469-9539-b10af44255ee",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/api/v2/countries"
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "c9b612ed-68b8-4d6a-9dc0-d5965f0f1faf",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/api/v2/countries"
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "cae78bcf-10f3-4e00-8b7d-45669bc00b62",
+              "name": "Not Found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/api/v2/countries"
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            }
+          ]
+        },
+        {
           "name": "Create_publisher_with_ssp_sources",
           "event": [
             {
@@ -1612,156 +1762,6 @@
               },
               "status": "Forbidden",
               "code": 403,
-              "_postman_previewlanguage": "text",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "cookie": [],
-              "responseTime": null,
-              "body": ""
-            }
-          ]
-        },
-        {
-          "name": "Create_publisher_with_dsps_filter",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "id": "b5f1281d-82a5-498f-a45a-b0c7ec264d1d",
-                "exec": [
-                  "//Status code",
-                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                  "",
-                  "//Content",
-                  "pm.test(\"Contains\", function () {",
-                  "    pm.expect(pm.response.text()).to.include(\"{\\\"allow\\\":true,\\\"values\\\":[25445]}\");",
-                  "    ",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            },
-            {
-              "listen": "prerequest",
-              "script": {
-                "id": "4db6ee52-2a3e-4fb1-8a54-d82d4e520d16",
-                "exec": [
-                  ""
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "_postman_id": "0795ceee-8aeb-4818-9705-0ee209022b9a",
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
-          "request": {
-            "auth": {
-              "type": "noauth"
-            },
-            "method": "POST",
-            "header": [
-              {
-                "key": "X-Authorization",
-                "value": "Bearer {{token}}"
-              },
-              {
-                "key": "Content-Type",
-                "name": "Content-Type",
-                "type": "text",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"name\": \"Postman: Publisher {{currentSprint}} {{startTimestamp}}\",\n    \"contacts\": {},\n    \"domain\": \"qa.com\",\n    \"paymentDetails\": \"\",\n    \"paymentTerm\": null,\n    \"sellerType\": \"PUBLISHER\",\n    \"status\": \"INACTIVE\",\n    \"type\": \"PUBLISHER\",\n    \"dsps\": {\n        \"allow\": true,\n        \"values\": [\n            25445\n        ]\n    }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/ssps"
-          },
-          "response": [
-            {
-              "id": "17549eb1-d5a4-492b-9a0c-7c32f9fc1baa",
-              "name": "OK",
-              "originalRequest": {
-                "method": "GET",
-                "header": [],
-                "url": "{{baseUrl}}/api/v2/countries"
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "text",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "*/*"
-                }
-              ],
-              "cookie": [],
-              "responseTime": null,
-              "body": ""
-            },
-            {
-              "id": "b8018dd9-47b7-4469-9539-b10af44255ee",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "method": "GET",
-                "header": [],
-                "url": "{{baseUrl}}/api/v2/countries"
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "_postman_previewlanguage": "text",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "cookie": [],
-              "responseTime": null,
-              "body": ""
-            },
-            {
-              "id": "c9b612ed-68b8-4d6a-9dc0-d5965f0f1faf",
-              "name": "Forbidden",
-              "originalRequest": {
-                "method": "GET",
-                "header": [],
-                "url": "{{baseUrl}}/api/v2/countries"
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "_postman_previewlanguage": "text",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "cookie": [],
-              "responseTime": null,
-              "body": ""
-            },
-            {
-              "id": "cae78bcf-10f3-4e00-8b7d-45669bc00b62",
-              "name": "Not Found",
-              "originalRequest": {
-                "method": "GET",
-                "header": [],
-                "url": "{{baseUrl}}/api/v2/countries"
-              },
-              "status": "Not Found",
-              "code": 404,
               "_postman_previewlanguage": "text",
               "header": [
                 {
