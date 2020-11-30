@@ -1029,6 +1029,146 @@
           ]
         },
         {
+          "name": "Get_publisher_ssp_source",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "4d6b3331-f325-4272-9d90-05fb9db5889a",
+                "exec": [
+                  "//Status code",
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "",
+                  "//Content",
+                  "pm.test(\"Contains\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(pm.environment.get(\"publisherId\"));",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "67e08838-a180-41d5-bec1-72ad54c28e9e",
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "8536abda-9b6f-4212-aabd-ad4786ed9b81",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/ssps/{{publisherId}}"
+          },
+          "response": [
+            {
+              "id": "0196aeec-b55c-4410-acd7-2516163ac881",
+              "name": "OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/api/v2/countries"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "05df23c4-538e-4eaa-9718-6ad078cc8128",
+              "name": "Not Found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/api/v2/countries"
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "c0d370c6-0ed8-426e-85ad-a6571085907f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/api/v2/countries"
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "ef7650c2-5e58-4947-b6b7-f7977ae3f33a",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/api/v2/countries"
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            }
+          ]
+        },
+        {
           "name": "Update_publisher_seller_type",
           "event": [
             {
@@ -1179,7 +1319,7 @@
           ]
         },
         {
-          "name": "Create_publisher_ssp_source",
+          "name": "Create_publisher_with_ssp_sources",
           "event": [
             {
               "listen": "test",
@@ -1191,10 +1331,8 @@
                   "",
                   "//Content",
                   "pm.test(\"Contains\", function () {",
-                  "    pm.expect(pm.response.text()).to.include(\"\\\"id\\\"\");",
-                  "    pm.expect(pm.response.text()).to.include(\"\\\"name\\\":\\\"Postman: Indirect Publisher Sprint\");",
                   "    pm.expect(pm.response.text()).to.include(\"\\\"publisherExchanges\\\"\");",
-                  "    pm.expect(pm.response.text()).to.include(\"\\\"publisherExchangeId\\\":\\\"77796c71-1066-41e7-b56c-0a477b9a3777\\\"\");",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"publisherExchangeId\\\"\");",
                   "    //TODO \"exchangeId\": 80563 is hardcoded for Test 3",
                   "    pm.expect(pm.response.text()).to.include(\"\\\"exchangeId\\\":80563\");",
                   "    //TODO \"exchangeId\": 25239 is hardcoded for Test 3",
@@ -1242,7 +1380,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"id\": null,\n    \"name\": \"Postman: Indirect Publisher {{currentSprint}} {{startTimestamp}}\",\n    \"adInsertion\": \"CSAI\",\n    \"contacts\": {\n        \"country\": \"BY\",\n        \"email\": \"so@adoppler.com\",\n        \"phone\": \"+375291111111\",\n        \"responsiblePerson\": \"QA QA\",\n        \"skype\": \"qa_qa\"\n    },\n    \"cookieSyncBidirect\": false,\n    \"cookieSyncEnabled\": false,\n    \"cookieSyncRedirectParam\": null,\n    \"cookieSyncUrl\": null,\n    \"cookieSyncUserMacro\": null,\n    \"domain\": \"qa.com\",\n    \"dsps\": null,\n    \"externalId\": \"17798134\",\n    \"group\": \"Publisher Group 1\",\n    \"marginPercentage\": 10,\n    \"paymentDetails\": \"Details\",\n    \"paymentTerm\": \"NET_0\",\n    \"publisherExchanges\": [\n        {\n            \"exchangeId\": 25239,\n            \"publisherExchangeId\": \"77796c71-1066-41e7-b56c-0a477b9a3777\"\n        },\n        {\n            \"exchangeId\": 80563,\n            \"publisherExchangeId\": \"77796c71-1066-41e7-b56c-0a477b9a3777\"\n        }\n    ],\n    \"requiredAdmResponse\": false,\n    \"sellerType\": \"PUBLISHER\",\n    \"status\": \"INACTIVE\",\n    \"thirdPartyAdm\": \"TAG\",\n    \"thirdPartyAdmEnabled\": true,\n    \"thirdPartyId\": \"100500\",\n    \"tmax\": 1000,\n    \"type\": \"PUBLISHER\"\n}",
+              "raw": "{\n    \"name\": \"Postman: Publisher {{currentSprint}} {{startTimestamp}}\",\n    \"contacts\": {},\n    \"domain\": \"qa.com\",\n    \"paymentDetails\": \"\",\n    \"paymentTerm\": null,\n    \"sellerType\": \"PUBLISHER\",\n    \"status\": \"INACTIVE\",\n    \"type\": \"PUBLISHER\",\n    \"publisherExchanges\": [\n        {\n            \"exchangeId\": 25239,\n            \"publisherExchangeId\": \"{{currentSprint}} {{startTimestamp}}\"\n        },\n        {\n            \"exchangeId\": 80563,\n            \"publisherExchangeId\": \"{{currentSprint}} {{startTimestamp}}\"\n        }\n    ]\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1317,166 +1455,6 @@
             },
             {
               "id": "fc77333f-33b4-4690-a052-6814977c2b52",
-              "name": "Forbidden",
-              "originalRequest": {
-                "method": "GET",
-                "header": [],
-                "url": "{{baseUrl}}/api/v2/countries"
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "_postman_previewlanguage": "text",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "cookie": [],
-              "responseTime": null,
-              "body": ""
-            }
-          ]
-        },
-        {
-          "name": "Get_publisher_ssp_source",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "id": "4d6b3331-f325-4272-9d90-05fb9db5889a",
-                "exec": [
-                  "//Status code",
-                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                  "",
-                  "//Content",
-                  "pm.test(\"Contains\", function () {",
-                  "    pm.expect(pm.response.text()).to.include(\"\\\"id\\\"\");",
-                  "    pm.expect(pm.response.text()).to.include(\"\\\"name\\\":\\\"Postman: Indirect Publisher Sprint\");",
-                  "    pm.expect(pm.response.text()).to.include(\"\\\"publisherExchanges\\\"\");",
-                  "    pm.expect(pm.response.text()).to.include(\"\\\"publisherExchangeId\\\":\\\"77796c71-1066-41e7-b56c-0a477b9a3777\\\"\");",
-                  "    //TODO \"exchangeId\": 80563 is hardcoded for Test 3",
-                  "    pm.expect(pm.response.text()).to.include(\"\\\"exchangeId\\\":80563\");",
-                  "    //TODO \"exchangeId\": 25239 is hardcoded for Test 3",
-                  "    pm.expect(pm.response.text()).to.include(\"\\\"exchangeId\\\":25239\");",
-                  "});",
-                  "",
-                  "//Set publisherId variable",
-                  "var jsonData = JSON.parse(responseBody);",
-                  "pm.environment.set(\"publisherId\", jsonData.id);"
-                ],
-                "type": "text/javascript"
-              }
-            },
-            {
-              "listen": "prerequest",
-              "script": {
-                "id": "67e08838-a180-41d5-bec1-72ad54c28e9e",
-                "exec": [
-                  ""
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "_postman_id": "8536abda-9b6f-4212-aabd-ad4786ed9b81",
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
-          "request": {
-            "auth": {
-              "type": "noauth"
-            },
-            "method": "GET",
-            "header": [
-              {
-                "key": "X-Authorization",
-                "value": "Bearer {{token}}"
-              },
-              {
-                "key": "Content-Type",
-                "name": "Content-Type",
-                "type": "text",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n    \"id\": null,\n    \"name\": \"Postman: Indirect Publisher {{currentSprint}} {{startTimestamp}}\",\n    \"adInsertion\": \"CSAI\",\n    \"contacts\": {\n        \"country\": \"BY\",\n        \"email\": \"so@adoppler.com\",\n        \"phone\": \"+375291111111\",\n        \"responsiblePerson\": \"QA QA\",\n        \"skype\": \"qa_qa\"\n    },\n    \"cookieSyncBidirect\": false,\n    \"cookieSyncEnabled\": false,\n    \"cookieSyncRedirectParam\": null,\n    \"cookieSyncUrl\": null,\n    \"cookieSyncUserMacro\": null,\n    \"domain\": \"qa.com\",\n    \"dsps\": [],\n    \"externalId\": \"17798134\",\n    \"group\": \"Publisher Group 1\",\n    \"marginPercentage\": 10,\n    \"paymentDetails\": \"Details\",\n    \"paymentTerm\": \"NET_0\",\n    \"publisherExchanges\": [\n        {\n            \"exchangeId\": 80563,\n            \"publisherExchangeId\": \"77796c71-1066-41e7-b56c-0a477b9a3777\"\n        }\n    ],\n    \"requiredAdmResponse\": false,\n    \"sellerType\": \"PUBLISHER\",\n    \"status\": \"INACTIVE\",\n    \"thirdPartyAdm\": \"TAG\",\n    \"thirdPartyAdmEnabled\": true,\n    \"thirdPartyId\": \"100500\",\n    \"tmax\": 1000,\n    \"type\": \"PUBLISHER\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/ssps/{{publisherId}}"
-          },
-          "response": [
-            {
-              "id": "0196aeec-b55c-4410-acd7-2516163ac881",
-              "name": "OK",
-              "originalRequest": {
-                "method": "GET",
-                "header": [],
-                "url": "{{baseUrl}}/api/v2/countries"
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "text",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "*/*"
-                }
-              ],
-              "cookie": [],
-              "responseTime": null,
-              "body": ""
-            },
-            {
-              "id": "05df23c4-538e-4eaa-9718-6ad078cc8128",
-              "name": "Not Found",
-              "originalRequest": {
-                "method": "GET",
-                "header": [],
-                "url": "{{baseUrl}}/api/v2/countries"
-              },
-              "status": "Not Found",
-              "code": 404,
-              "_postman_previewlanguage": "text",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "cookie": [],
-              "responseTime": null,
-              "body": ""
-            },
-            {
-              "id": "c0d370c6-0ed8-426e-85ad-a6571085907f",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "method": "GET",
-                "header": [],
-                "url": "{{baseUrl}}/api/v2/countries"
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "_postman_previewlanguage": "text",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "cookie": [],
-              "responseTime": null,
-              "body": ""
-            },
-            {
-              "id": "ef7650c2-5e58-4947-b6b7-f7977ae3f33a",
               "name": "Forbidden",
               "originalRequest": {
                 "method": "GET",
@@ -1660,9 +1638,6 @@
                   "",
                   "//Content",
                   "pm.test(\"Contains\", function () {",
-                  "    const responseJson = pm.response.json();",
-                  "    pm.expect(pm.response.text()).to.include(\"\\\"id\\\"\");",
-                  "    pm.expect(pm.response.text()).to.include(\"\\\"name\\\":\\\"Postman: Publisher with dsps filtering\");",
                   "    pm.expect(pm.response.text()).to.include(\"{\\\"allow\\\":true,\\\"values\\\":[25445]}\");",
                   "    ",
                   "});"
@@ -1704,7 +1679,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"id\": null,\n    \"name\": \"Postman: Publisher with dsps filtering {{currentSprint}} {{startTimestamp}}\",\n    \"adInsertion\": null,\n    \"adsTxtEntry\": null,\n    \"blackLists\": {\n        \"advDomains\": null,\n        \"appBundles\": null,\n        \"categories\": {\n            \"allow\": true,\n            \"values\": []\n        },\n        \"creativeIds\": null,\n        \"ips\": null,\n        \"siteDomains\": null\n    },\n    \"contacts\": {\n        \"country\": null,\n        \"email\": null,\n        \"phone\": null,\n        \"responsiblePerson\": null,\n        \"skype\": null\n    },\n    \"cookieSyncBidirect\": false,\n    \"cookieSyncEnabled\": false,\n    \"cookieSyncRedirectParam\": null,\n    \"cookieSyncUrl\": null,\n    \"cookieSyncUserMacro\": null,\n    \"domain\": \"qa.com\",\n    \"rtbVersion\": null,\n    \"dsps\": {\n        \"allow\": true,\n        \"values\": [\n            25445\n        ]\n    },\n    \"externalId\": null,\n    \"group\": null,\n    \"logoBase64\": null,\n    \"marginPercentage\": null,\n    \"paymentDetails\": \"\",\n    \"paymentTerm\": null,\n    \"publisherExchanges\": [\n        {\n            \"exchangeId\": 70173,\n            \"publisherExchangeId\": \"123\"\n        }\n    ],\n    \"publisherType\": null,\n    \"requiredAdmResponse\": false,\n    \"secured\": false,\n    \"sellerType\": \"PUBLISHER\",\n    \"sharedForAll\": false,\n    \"sharedSettings\": [],\n    \"status\": \"INACTIVE\",\n    \"supplySources\": [],\n    \"thirdPartyAdm\": null,\n    \"thirdPartyAdmEnabled\": false,\n    \"thirdPartyId\": null,\n    \"thirdPartyImpressionBeacons\": [],\n    \"thirdPartyBeacons\": [],\n    \"tmax\": null,\n    \"type\": \"PUBLISHER\",\n    \"xandrPlacementId\": null\n}",
+              "raw": "{\n    \"name\": \"Postman: Publisher {{currentSprint}} {{startTimestamp}}\",\n    \"contacts\": {},\n    \"domain\": \"qa.com\",\n    \"paymentDetails\": \"\",\n    \"paymentTerm\": null,\n    \"sellerType\": \"PUBLISHER\",\n    \"status\": \"INACTIVE\",\n    \"type\": \"PUBLISHER\",\n    \"dsps\": {\n        \"allow\": true,\n        \"values\": [\n            25445\n        ]\n    }\n}",
               "options": {
                 "raw": {
                   "language": "json"
