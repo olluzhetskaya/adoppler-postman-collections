@@ -684,155 +684,6 @@
           "name": "Positive",
           "item": [
             {
-              "name": "Create_publisher_same_ssp",
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "id": "b1278407-61d2-4809-8829-5a3788c1850e",
-                    "exec": [
-                      "//Status code",
-                      "tests[\"Status code is 500\"] = responseCode.code === 500;",
-                      "",
-                      "//Content",
-                      "pm.test(\"Contains error\", function () {",
-                      "    pm.expect(pm.response.text()).to.include(\"A different object with the same identifier value was already associated with the session\");",
-                      "});"
-                    ],
-                    "type": "text/javascript"
-                  }
-                },
-                {
-                  "listen": "prerequest",
-                  "script": {
-                    "id": "f855e52f-4743-4645-a333-570137df9e64",
-                    "exec": [
-                      ""
-                    ],
-                    "type": "text/javascript"
-                  }
-                }
-              ],
-              "_postman_id": "15f70a7e-578b-44f9-a32f-7194d15b7a99",
-              "protocolProfileBehavior": {
-                "disableBodyPruning": true
-              },
-              "request": {
-                "auth": {
-                  "type": "noauth"
-                },
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "X-Authorization",
-                    "value": "Bearer {{token}}"
-                  },
-                  {
-                    "key": "Content-Type",
-                    "name": "Content-Type",
-                    "type": "text",
-                    "value": "application/json"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n    \"id\": null,\n    \"name\": \"Postman: Indirect Publisher {{currentSprint}} {{startTimestamp}}\",\n    \"adInsertion\": \"CSAI\",\n    \"contacts\": {\n        \"country\": \"BY\",\n        \"email\": \"so@adoppler.com\",\n        \"phone\": \"+375291111111\",\n        \"responsiblePerson\": \"QA QA\",\n        \"skype\": \"qa_qa\"\n    },\n    \"cookieSyncBidirect\": false,\n    \"cookieSyncEnabled\": false,\n    \"cookieSyncRedirectParam\": null,\n    \"cookieSyncUrl\": null,\n    \"cookieSyncUserMacro\": null,\n    \"domain\": \"qa.com\",\n    \"dsps\": null,\n    \"externalId\": \"17798134\",\n    \"group\": \"Publisher Group 1\",\n    \"marginPercentage\": 10,\n    \"paymentDetails\": \"Details\",\n    \"paymentTerm\": \"NET_0\",\n    \"publisherExchanges\": [\n        {\n            \"exchangeId\": 80563,\n            \"publisherExchangeId\": \"77796c71-1066-41e7-b56c-0a477b9a3777\"\n        },\n\n        {\n            \"exchangeId\": 80563,\n            \"publisherExchangeId\": \"77796c71-1066-41e7-b56c-0a477b9a3777\"\n        }\n    ],\n    \"requiredAdmResponse\": false,\n    \"sellerType\": \"PUBLISHER\",\n    \"publisherType\": \"MIXED_BY_FILTERING\",\n    \"status\": \"INACTIVE\",\n    \"thirdPartyAdm\": \"TAG\",\n    \"thirdPartyAdmEnabled\": true,\n    \"thirdPartyId\": \"100500\",\n    \"tmax\": 1000,\n    \"type\": \"PUBLISHER\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/ssps"
-              },
-              "response": [
-                {
-                  "id": "4c6eb4ec-b43a-4c10-b535-d3e03079498b",
-                  "name": "OK",
-                  "originalRequest": {
-                    "method": "GET",
-                    "header": [],
-                    "url": "{{baseUrl}}/api/v2/countries"
-                  },
-                  "status": "OK",
-                  "code": 200,
-                  "_postman_previewlanguage": "text",
-                  "header": [
-                    {
-                      "key": "Content-Type",
-                      "value": "*/*"
-                    }
-                  ],
-                  "cookie": [],
-                  "responseTime": null,
-                  "body": ""
-                },
-                {
-                  "id": "f1476434-9754-4c8c-afe6-a03de43f8d1d",
-                  "name": "Unauthorized",
-                  "originalRequest": {
-                    "method": "GET",
-                    "header": [],
-                    "url": "{{baseUrl}}/api/v2/countries"
-                  },
-                  "status": "Unauthorized",
-                  "code": 401,
-                  "_postman_previewlanguage": "text",
-                  "header": [
-                    {
-                      "key": "Content-Type",
-                      "value": "text/plain"
-                    }
-                  ],
-                  "cookie": [],
-                  "responseTime": null,
-                  "body": ""
-                },
-                {
-                  "id": "f2d8a1ae-20d0-4891-957d-3944a37dc4fd",
-                  "name": "Not Found",
-                  "originalRequest": {
-                    "method": "GET",
-                    "header": [],
-                    "url": "{{baseUrl}}/api/v2/countries"
-                  },
-                  "status": "Not Found",
-                  "code": 404,
-                  "_postman_previewlanguage": "text",
-                  "header": [
-                    {
-                      "key": "Content-Type",
-                      "value": "text/plain"
-                    }
-                  ],
-                  "cookie": [],
-                  "responseTime": null,
-                  "body": ""
-                },
-                {
-                  "id": "fd7b8a0e-02ed-4f42-8416-1864ae59b2f1",
-                  "name": "Forbidden",
-                  "originalRequest": {
-                    "method": "GET",
-                    "header": [],
-                    "url": "{{baseUrl}}/api/v2/countries"
-                  },
-                  "status": "Forbidden",
-                  "code": 403,
-                  "_postman_previewlanguage": "text",
-                  "header": [
-                    {
-                      "key": "Content-Type",
-                      "value": "text/plain"
-                    }
-                  ],
-                  "cookie": [],
-                  "responseTime": null,
-                  "body": ""
-                }
-              ]
-            },
-            {
               "name": "Create_publisher_same_ssp Copy",
               "event": [
                 {
@@ -2089,6 +1940,155 @@
             },
             {
               "id": "ef7650c2-5e58-4947-b6b7-f7977ae3f33a",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/api/v2/countries"
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "Create_publisher_same_ssp",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "b1278407-61d2-4809-8829-5a3788c1850e",
+                "exec": [
+                  "//Status code",
+                  "tests[\"Status code is 500\"] = responseCode.code === 500;",
+                  "",
+                  "//Content",
+                  "pm.test(\"Contains error\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(\"A different object with the same identifier value was already associated with the session\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "f855e52f-4743-4645-a333-570137df9e64",
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "15f70a7e-578b-44f9-a32f-7194d15b7a99",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": null,\n    \"name\": \"Postman: Indirect Publisher {{currentSprint}} {{startTimestamp}}\",\n    \"adInsertion\": \"CSAI\",\n    \"contacts\": {\n        \"country\": \"BY\",\n        \"email\": \"so@adoppler.com\",\n        \"phone\": \"+375291111111\",\n        \"responsiblePerson\": \"QA QA\",\n        \"skype\": \"qa_qa\"\n    },\n    \"cookieSyncBidirect\": false,\n    \"cookieSyncEnabled\": false,\n    \"cookieSyncRedirectParam\": null,\n    \"cookieSyncUrl\": null,\n    \"cookieSyncUserMacro\": null,\n    \"domain\": \"qa.com\",\n    \"dsps\": null,\n    \"externalId\": \"17798134\",\n    \"group\": \"Publisher Group 1\",\n    \"marginPercentage\": 10,\n    \"paymentDetails\": \"Details\",\n    \"paymentTerm\": \"NET_0\",\n    \"publisherExchanges\": [\n        {\n            \"exchangeId\": 80563,\n            \"publisherExchangeId\": \"77796c71-1066-41e7-b56c-0a477b9a3777\"\n        },\n\n        {\n            \"exchangeId\": 80563,\n            \"publisherExchangeId\": \"77796c71-1066-41e7-b56c-0a477b9a3777\"\n        }\n    ],\n    \"requiredAdmResponse\": false,\n    \"sellerType\": \"PUBLISHER\",\n    \"publisherType\": \"MIXED_BY_FILTERING\",\n    \"status\": \"INACTIVE\",\n    \"thirdPartyAdm\": \"TAG\",\n    \"thirdPartyAdmEnabled\": true,\n    \"thirdPartyId\": \"100500\",\n    \"tmax\": 1000,\n    \"type\": \"PUBLISHER\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/ssps"
+          },
+          "response": [
+            {
+              "id": "4c6eb4ec-b43a-4c10-b535-d3e03079498b",
+              "name": "OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/api/v2/countries"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "f1476434-9754-4c8c-afe6-a03de43f8d1d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/api/v2/countries"
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "f2d8a1ae-20d0-4891-957d-3944a37dc4fd",
+              "name": "Not Found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/api/v2/countries"
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "fd7b8a0e-02ed-4f42-8416-1864ae59b2f1",
               "name": "Forbidden",
               "originalRequest": {
                 "method": "GET",
