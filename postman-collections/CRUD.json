@@ -1627,7 +1627,156 @@
           ]
         },
         {
-          "name": "Create_publisher_same_ssp",
+          "name": "Create_publisher_with_ssp_already_used",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "df598391-b830-4a9e-a0b7-93ee57460cda",
+                "exec": [
+                  "//Status code",
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "",
+                  "//Content",
+                  "pm.test(\"Contains: id, name\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"supplySources\\\":\\[21740\\]\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "89921c47-6be1-49b2-9411-af36e0068d11",
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "b03dcf94-7ddf-42df-81fc-4c6acf28df2a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Postman: Publisher {{currentSprint}} {{startTimestamp}}\",\n    \"contacts\": {},\n    \"domain\": \"qa.com\",\n    \"paymentDetails\": \"\",\n    \"paymentTerm\": null,\n    \"sellerType\": \"PUBLISHER\",\n    \"status\": \"INACTIVE\",\n    \"type\": \"PUBLISHER\",\n    \"supplySources\": [\n        21740\n    ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/ssps"
+          },
+          "response": [
+            {
+              "id": "448ec4f9-8f33-4c01-b192-b7926b5b02ea",
+              "name": "Not Found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/api/v2/countries"
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "7f52361a-377a-4591-9b74-b35ef353d9f6",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/api/v2/countries"
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "e5589b76-0db5-4bc2-b91b-64fe4527f20a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/api/v2/countries"
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "fa8e8da9-f907-410b-bf79-c8be05304156",
+              "name": "OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/api/v2/countries"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "Create_publisher_same_ssp_validation",
           "event": [
             {
               "listen": "test",
@@ -1635,11 +1784,11 @@
                 "id": "b1278407-61d2-4809-8829-5a3788c1850e",
                 "exec": [
                   "//Status code",
-                  "tests[\"Status code is 500\"] = responseCode.code === 500;",
+                  "tests[\"Status code is 400\"] = responseCode.code === 400;",
                   "",
                   "//Content",
                   "pm.test(\"Contains error\", function () {",
-                  "    pm.expect(pm.response.text()).to.include(\"A different object with the same identifier value was already associated with the session\");",
+                  "    pm.expect(pm.response.text()).to.include(\"already exists for another publisher\");",
                   "});"
                 ],
                 "type": "text/javascript"
@@ -1679,7 +1828,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"id\": null,\n    \"name\": \"Postman: Indirect Publisher {{currentSprint}} {{startTimestamp}}\",\n    \"adInsertion\": \"CSAI\",\n    \"contacts\": {\n        \"country\": \"BY\",\n        \"email\": \"so@adoppler.com\",\n        \"phone\": \"+375291111111\",\n        \"responsiblePerson\": \"QA QA\",\n        \"skype\": \"qa_qa\"\n    },\n    \"cookieSyncBidirect\": false,\n    \"cookieSyncEnabled\": false,\n    \"cookieSyncRedirectParam\": null,\n    \"cookieSyncUrl\": null,\n    \"cookieSyncUserMacro\": null,\n    \"domain\": \"qa.com\",\n    \"dsps\": null,\n    \"externalId\": \"17798134\",\n    \"group\": \"Publisher Group 1\",\n    \"marginPercentage\": 10,\n    \"paymentDetails\": \"Details\",\n    \"paymentTerm\": \"NET_0\",\n    \"publisherExchanges\": [\n        {\n            \"exchangeId\": 80563,\n            \"publisherExchangeId\": \"77796c71-1066-41e7-b56c-0a477b9a3777\"\n        },\n\n        {\n            \"exchangeId\": 80563,\n            \"publisherExchangeId\": \"77796c71-1066-41e7-b56c-0a477b9a3777\"\n        }\n    ],\n    \"requiredAdmResponse\": false,\n    \"sellerType\": \"PUBLISHER\",\n    \"publisherType\": \"MIXED_BY_FILTERING\",\n    \"status\": \"INACTIVE\",\n    \"thirdPartyAdm\": \"TAG\",\n    \"thirdPartyAdmEnabled\": true,\n    \"thirdPartyId\": \"100500\",\n    \"tmax\": 1000,\n    \"type\": \"PUBLISHER\"\n}",
+              "raw": "{\n    \"name\": \"Postman: Publisher {{currentSprint}} {{startTimestamp}}\",\n    \"contacts\": {},\n    \"domain\": \"qa.com\",\n    \"paymentDetails\": \"\",\n    \"paymentTerm\": null,\n    \"sellerType\": \"PUBLISHER\",\n    \"status\": \"INACTIVE\",\n    \"type\": \"PUBLISHER\",\n    \"publisherExchanges\": [\n        {\n            \"exchangeId\": 80563,\n            \"publisherExchangeId\": \"77796c71-1066-41e7-b56c-0a477b9a3777\"\n        },\n\n        {\n            \"exchangeId\": 80563,\n            \"publisherExchangeId\": \"77796c71-1066-41e7-b56c-0a477b9a3777\"\n        }\n    ]\n}",
               "options": {
                 "raw": {
                   "language": "json"
