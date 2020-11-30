@@ -2563,7 +2563,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "c956f90b-3218-46ab-85d8-2781261d3150",
+                "id": "00b5d696-2ba8-480a-9bd2-89af4b0f39b2",
                 "exec": [
                   "//Status code",
                   "tests[\"Status code is 200\"] = responseCode.code === 200;",
@@ -2572,7 +2572,11 @@
                   "pm.test(\"Contains\", function () {",
                   "    pm.expect(pm.response.text()).to.include(\"\\\"id\\\"\");",
                   "    pm.expect(pm.response.text()).to.include(\"\\\"name\\\":\\\"Postman: SiteApp\");  ",
-                  "});"
+                  "});",
+                  "",
+                  "//Set publisherId variable",
+                  "var jsonData = JSON.parse(responseBody);",
+                  "pm.environment.set(\"siteAppId\", jsonData.id);"
                 ],
                 "type": "text/javascript"
               }
@@ -2598,7 +2602,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"id\": null,\n    \"name\": \"Postman: SiteApp {{currentSprint}} {{startTimestamp}}\",\n    \"adUnits\": 0,\n    \"blockedCategories\": [],\n    \"categories\": [],\n    \"domain\": null,\n    \"appBundle\": null,\n    \"appStoreUrl\": null,\n    \"dsps\": null,\n    \"group\": null,\n    \"languages\": [],\n    \"ssp\": 1977267,\n    \"publisherInventories\": [],\n    \"status\": \"INACTIVE\",\n    \"thirdPartyId\": null,\n    \"type\": \"CTV_OTT\"\n}",
+              "raw": "{\n    \"name\": \"Postman: SiteApp {{currentSprint}} {{startTimestamp}}\",\n    \"domain\": null,\n    \"ssp\": 1977267,\n    \"status\": \"INACTIVE\",\n    \"type\": \"CTV_OTT\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -2606,6 +2610,48 @@
               }
             },
             "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/inventories"
+          },
+          "response": []
+        },
+        {
+          "name": "Get_inventory",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "c0510800-0733-44b9-84c1-ef90981827bf",
+                "exec": [
+                  "//Status code",
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "",
+                  "//Content",
+                  "pm.test(\"Contains\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(pm.environment.get(\"siteAppId\"));",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "0fd2e5ac-7905-43df-ad03-2599b548038f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/inventories/{{siteAppId}}"
           },
           "response": []
         },
@@ -2710,48 +2756,6 @@
               }
             },
             "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/inventories"
-          },
-          "response": []
-        },
-        {
-          "name": "Get_inventory",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "id": "c0510800-0733-44b9-84c1-ef90981827bf",
-                "exec": [
-                  "//Status code",
-                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                  "",
-                  "//Content",
-                  "pm.test(\"Contains\", function () {",
-                  "    pm.expect(pm.response.text()).to.include(pm.environment.get(\"siteAppId\"));",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "_postman_id": "0fd2e5ac-7905-43df-ad03-2599b548038f",
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "X-Authorization",
-                "value": "Bearer {{token}}",
-                "type": "text"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "type": "text"
-              }
-            ],
-            "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/inventories/{{siteAppId}}"
           },
           "response": []
         },
