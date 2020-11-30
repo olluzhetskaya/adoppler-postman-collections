@@ -2672,7 +2672,6 @@
                   "    pm.expect(pm.response.text()).to.include(\"\\\"status\\\":\\\"INACTIVE\");",
                   "    pm.expect(pm.response.text()).to.include(\"\\\"ssp\\\"\"); ",
                   "    pm.expect(pm.response.text()).to.include(\"\\\"name\\\":\\\"Postman: SiteApp\"); ",
-                  "    pm.expect(pm.response.text()).to.include(\"\\\"domain\\\":\\\"qa.com\"); ",
                   "});"
                 ],
                 "type": "text/javascript"
@@ -2699,7 +2698,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"ssp\": 1977267,\n    \"name\": \"Postman: SiteApp Sprint 8 2020-11-30T15:56:21.803Z\",\n    \"type\": \"DESKTOP_WEB\",\n    \"domain\": \"qa.com\",\n    \"status\": \"INACTIVE\",\n    \"categories\": [],\n    \"blockedCategories\": [],\n    \"languages\": [],\n    \"group\": null,\n    \"dsps\": null,\n    \"thirdPartyId\": null,\n    \"sharedForAll\": false,\n    \"sharedSettings\": [],\n    \"appBundle\": null,\n    \"appStoreUrl\": null,\n    \"publisherInventories\": []\n}",
+              "raw": "{\n    \"ssp\": 1977267,\n    \"name\": \"Postman: SiteApp {{currentSprint}} {{startTimestamp}}\",\n    \"type\": \"DESKTOP_WEB\",\n    \"domain\": null,\n    \"status\": \"INACTIVE\",\n    \"categories\": [],\n    \"blockedCategories\": [],\n    \"languages\": [],\n    \"group\": null,\n    \"dsps\": null,\n    \"thirdPartyId\": null,\n    \"sharedForAll\": false,\n    \"sharedSettings\": [],\n    \"appBundle\": null,\n    \"appStoreUrl\": null,\n    \"publisherInventories\": []\n}",
               "options": {
                 "raw": {
                   "language": "json"
