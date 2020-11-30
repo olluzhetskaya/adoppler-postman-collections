@@ -1627,7 +1627,7 @@
           ]
         },
         {
-          "name": "Create_publisher_with_ssp_already_used",
+          "name": "Create_publisher_with_supplySource",
           "event": [
             {
               "listen": "test",
@@ -2359,6 +2359,11 @@
         }
       ],
       "_postman_id": "e288d47a-401d-4ee8-ac5c-c1e2dd1ce449"
+    },
+    {
+      "name": "SiteApp (CRUD)",
+      "item": [],
+      "_postman_id": "f3d9168b-e3f4-4772-8fa3-2317a12775b8"
     }
   ]
 }
