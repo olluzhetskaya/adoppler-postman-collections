@@ -499,108 +499,6 @@
           "response": []
         },
         {
-          "name": "Create_dsp_required_name",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "id": "e16b1297-b807-4566-afb7-e76d6050c0c1",
-                "exec": [
-                  "//Status code",
-                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                  "",
-                  "// Type",
-                  "pm.test(\"Response:\", function () {",
-                  "    pm.expect(pm.response.text()).to.include(\"\\\"name\\\":null\");",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "_postman_id": "c8f1b163-49f1-449b-aa31-683d62b1140d",
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "X-Authorization",
-                "value": "Bearer {{token}}",
-                "type": "text"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json",
-                "type": "text"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"auctionMode\": \"SECOND_PRICE\",\n  \"contacts\": {},\n  \"ortbVersion\": \"V2_3\",\n  \"requestFilter\": {\n    \"adTypes\": [],\n     \"countries\": [],\n    \"sizes\": [],\n    \"ssps\": {\n      \"allow\": true,\n      \"values\": []\n    }\n  },\n  \"status\": \"INACTIVE\",\n  \"type\": \"RTB\",\n  \"url\": \"http://qa.com\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/dsps"
-          },
-          "response": []
-        },
-        {
-          "name": "Create_dsp_min_lengh_name_validation",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "id": "afc4a5dc-9290-4067-a51f-c11e686978ff",
-                "exec": [
-                  "//Status code",
-                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
-                  "",
-                  "// Type",
-                  "pm.test(\"Response:\", function () {",
-                  "    pm.expect(pm.response.text()).to.include(\"\\\"name\\\":\\\"P\");",
-                  "});"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "_postman_id": "4fabff95-8f63-445b-bb7d-83298d10695b",
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          },
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "X-Authorization",
-                "type": "text",
-                "value": "Bearer {{token}}"
-              },
-              {
-                "key": "Content-Type",
-                "type": "text",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"P\",\n  \"auctionMode\": \"SECOND_PRICE\",\n  \"contacts\": {},\n  \"ortbVersion\": \"V2_3\",\n  \"requestFilter\": {\n    \"adTypes\": [],\n     \"countries\": [],\n    \"sizes\": [],\n    \"ssps\": {\n      \"allow\": true,\n      \"values\": []\n    }\n  },\n  \"status\": \"INACTIVE\",\n  \"type\": \"RTB\",\n  \"url\": \"http://qa.com\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/dsps"
-          },
-          "response": []
-        },
-        {
           "name": "Create_dsp_type_TAG",
           "event": [
             {
@@ -652,7 +550,7 @@
           "response": []
         },
         {
-          "name": "Create_dsp_tag_with_null_price",
+          "name": "Create_dsp_tag_without_price",
           "event": [
             {
               "listen": "test",
@@ -687,13 +585,13 @@
             "header": [
               {
                 "key": "X-Authorization",
-                "value": "Bearer {{token}}",
-                "type": "text"
+                "type": "text",
+                "value": "Bearer {{token}}"
               },
               {
                 "key": "Content-Type",
-                "value": "application/json",
-                "type": "text"
+                "type": "text",
+                "value": "application/json"
               }
             ],
             "body": {
