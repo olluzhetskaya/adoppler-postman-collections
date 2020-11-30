@@ -2362,7 +2362,254 @@
     },
     {
       "name": "SiteApp (CRUD)",
-      "item": [],
+      "item": [
+        {
+          "name": "Login_admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "0a6a73d0-fbca-4d03-a41b-3794efe4f743",
+                "exec": [
+                  "//Status code",
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "",
+                  "//No error message",
+                  "pm.test(\"No error message\", function () {",
+                  "    pm.expect(pm.response.text()).to.not.include(\"Invalid email or password. Please, try again.\");",
+                  "});",
+                  "",
+                  "//Content",
+                  "pm.test(\"Contains: token, refreshToken, role\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(\"token\");",
+                  "    pm.expect(pm.response.text()).to.include(\"refreshToken\");",
+                  "    pm.expect(pm.response.text()).to.include(\"permissions\");",
+                  "});",
+                  "",
+                  "//Set token variable",
+                  "var jsonData = JSON.parse(responseBody);",
+                  "pm.environment.set(\"token\", jsonData.token);"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "229519f0-eb86-44a1-9eb8-3c1ad4947290",
+                "exec": [
+                  "//Save current time before start",
+                  "pm.environment.set(\"startTimestamp\", (new Date()).toISOString());"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "31f85621-6652-425b-9a71-15b766996c52",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"admin@admin.com\",\n    \"password\": \"7895123\"\n}",
+              "options": {
+                "raw": {}
+              }
+            },
+            "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/auth/login"
+          },
+          "response": [
+            {
+              "id": "1c0cae42-fa45-4afa-9ef7-b8b30ea905f8",
+              "name": "OK",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\": \"<string>\",\n    \"password\": \"<string>\"\n}"
+                },
+                "url": "{{baseUrl}}/api/v2/auth/login"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "402162f0-bd0a-4a89-808c-d231b48c5ce4",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\": \"<string>\",\n    \"password\": \"<string>\"\n}"
+                },
+                "url": "{{baseUrl}}/api/v2/auth/login"
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "9a6023fe-8883-4c90-9287-86b5a897398d",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\": \"<string>\",\n    \"password\": \"<string>\"\n}"
+                },
+                "url": "{{baseUrl}}/api/v2/auth/login"
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "f507acbc-db11-417e-ab6c-10ba467aba94",
+              "name": "Created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\": \"<string>\",\n    \"password\": \"<string>\"\n}"
+                },
+                "url": "{{baseUrl}}/api/v2/auth/login"
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "fa242cbf-63aa-45d1-a95c-17f1dd0bb085",
+              "name": "Not Found",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"email\": \"<string>\",\n    \"password\": \"<string>\"\n}"
+                },
+                "url": "{{baseUrl}}/api/v2/auth/login"
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "Create_inventory",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "c956f90b-3218-46ab-85d8-2781261d3150",
+                "exec": [
+                  "//Status code",
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "",
+                  "//Content",
+                  "pm.test(\"Contains\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"id\\\"\");",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"name\\\":\\\"Postman: SiteApp\");  ",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "a75c9b72-93b4-48b6-afe3-6b24610056c0",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": null,\n    \"name\": \"Postman: SiteApp {{currentSprint}} {{startTimestamp}}\",\n    \"adUnits\": 0,\n    \"blockedCategories\": [],\n    \"categories\": [],\n    \"domain\": null,\n    \"appBundle\": null,\n    \"appStoreUrl\": null,\n    \"dsps\": null,\n    \"group\": null,\n    \"languages\": [],\n    \"ssp\": 1977267,\n    \"publisherInventories\": [],\n    \"status\": \"INACTIVE\",\n    \"thirdPartyId\": null,\n    \"type\": \"CTV_OTT\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/inventories"
+          },
+          "response": []
+        }
+      ],
       "_postman_id": "f3d9168b-e3f4-4772-8fa3-2317a12775b8"
     }
   ]
