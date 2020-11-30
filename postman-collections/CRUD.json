@@ -2716,7 +2716,7 @@
             {
               "listen": "test",
               "script": {
-                "id": "66baf13c-64b1-44f2-be1e-846b0bdecf9d",
+                "id": "3a99a878-1160-4d8b-a46d-0330ff7e6130",
                 "exec": [
                   "//Status code",
                   "tests[\"Status code is 200\"] = responseCode.code === 200;",
@@ -2724,7 +2724,8 @@
                   "//Content",
                   "pm.test(\"Contains\", function () {",
                   "    pm.expect(pm.response.text()).to.include(\"\\\"id\\\"\");",
-                  "    pm.expect(pm.response.text()).to.include(\"\\\"name\\\":\\\"Postman: SiteApp\");  ",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"publisherInventories\");",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"exchangeInventoryId\");",
                   "});"
                 ],
                 "type": "text/javascript"
@@ -2751,7 +2752,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"id\": null,\n    \"name\": \"Postman: SiteApp {{currentSprint}} {{startTimestamp}}\",\n    \"adUnits\": 0,\n    \"blockedCategories\": [],\n    \"categories\": [],\n    \"domain\": null,\n    \"appBundle\": null,\n    \"appStoreUrl\": null,\n    \"dsps\": null,\n    \"group\": null,\n    \"languages\": [],\n    \"ssp\": 1977267,\n    \"publisherInventories\": [],\n    \"status\": \"INACTIVE\",\n    \"thirdPartyId\": null,\n    \"type\": \"CTV_OTT\"\n}",
+              "raw": "{\n    \"id\": null,\n    \"name\": \"Postman: SiteApp {{currentSprint}} {{startTimestamp}}\",\n    \"adUnits\": 0,\n    \"blockedCategories\": [],\n    \"categories\": [],\n    \"domain\": null,\n    \"appBundle\": null,\n    \"appStoreUrl\": null,\n    \"dsps\": null,\n    \"group\": null,\n    \"languages\": [],\n    \"ssp\": 1977267,\n   \"publisherInventories\": [\n        {\n            \"exchangeId\": 70173,\n            \"exchangeInventoryId\": \"{{startTimestamp}}\"\n        }\n    ],\n    \"status\": \"INACTIVE\",\n    \"thirdPartyId\": null,\n    \"type\": \"CTV_OTT\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
