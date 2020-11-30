@@ -2702,6 +2702,48 @@
             "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/inventories/{{siteAppId}}"
           },
           "response": []
+        },
+        {
+          "name": "Get_inventory Copy",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "a65c9076-5b2d-48d1-9fcc-49c5702f7efd",
+                "exec": [
+                  "//Status code",
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "",
+                  "//Content",
+                  "pm.test(\"Contains\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(pm.environment.get(\"siteAppId\"));",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "aaaead7f-5af6-45c9-934b-c7bc42ef2946",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/inventories/{{siteAppId}}"
+          },
+          "response": []
         }
       ],
       "_postman_id": "f3d9168b-e3f4-4772-8fa3-2317a12775b8"
