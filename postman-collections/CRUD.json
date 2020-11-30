@@ -1774,6 +1774,290 @@
               "body": ""
             }
           ]
+        },
+        {
+          "name": "Update_publisher_without_id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "1c94ab70-b756-494e-956e-34c30e745135",
+                "exec": [
+                  "//Status code",
+                  "tests[\"Status code is 500\"] = responseCode.code === 500;",
+                  "",
+                  "//Content",
+                  "pm.test(\"Contains\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(\"\\Request method 'PUT' not supported\\\"\");",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "2bae99a6-9789-46da-b25f-fb7c496274d2",
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "3cf20693-8262-495d-86c7-cc8e076e625c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"type\": \"PUBLISHER\",\n    \"externalId\": \"71134469\",\n    \"status\": \"INACTIVE\",\n    \"name\": \"Postman: Publisher Sprint 8 2020-11-30T13:03:03.801Z\",\n    \"contacts\": {\n        \"responsiblePerson\": null,\n        \"email\": null,\n        \"phone\": null,\n        \"skype\": null,\n        \"country\": null\n    },\n    \"thirdPartyAdm\": \"\",\n    \"thirdPartyAdmEnabled\": false,\n     \"dsps\": {\n        \"allow\": true,\n        \"values\": [\n            25445\n        ]\n    },\n    \"requiredAdmResponse\": null,\n    \"domain\": \"qa.com\",\n    \"paymentTerm\": null,\n    \"paymentDetails\": \"\",\n    \"group\": null,\n    \"marginPercentage\": null,\n    \"tmax\": null,\n    \"sellerType\": \"INTERMEDIARY\",\n    \"adInsertion\": null,\n    \"thirdPartyId\": null,\n    \"xandrPlacementId\": null,\n    \"publisherExchanges\": [],\n    \"logoBase64\": null,\n    \"sharedForAll\": false,\n    \"sharedSettings\": [],\n    \"adsTxtEntry\": \"ads-test3.env.geomotiv.com, 71134469, DIRECT\",\n    \"blackLists\": {\n        \"ips\": null,\n        \"advDomains\": null,\n        \"appBundles\": null,\n        \"creativeIds\": null,\n        \"siteDomains\": null,\n        \"categories\": {\n            \"allow\": false,\n            \"values\": []\n        }\n    },\n    \"rtbVersion\": null,\n    \"publisherType\": \"TAG_ONLY\",\n    \"supplySources\": [],\n    \"thirdPartyImpressionBeacons\": [],\n    \"thirdPartyBeacons\": [],\n    \"adPod\": {\n        \"adPodDuration\": null,\n        \"adPodCount\": null,\n        \"adPodType\": null,\n        \"responseMode\": null,\n        \"adPodLayouts\": [],\n        \"serveIncomplete\": false,\n        \"fallbackMode\": false,\n        \"deduplicationTypes\": []\n    },\n    \"secured\": false,\n    \"fraudRiskThreshold\": null,\n    \"includePixalateBeacon\": null,\n    \"pixalateBeaconChance\": null\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/ssps"
+          },
+          "response": [
+            {
+              "id": "36e98811-3ad9-41b3-89b0-76dc7f45ab59",
+              "name": "OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/api/v2/countries"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "62110c36-13a6-4cdf-9490-96097b90f500",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/api/v2/countries"
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "75fbb7b8-813e-437c-b45a-a41dccb1e466",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/api/v2/countries"
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "dcf93622-50dd-4507-84f2-6d012bdd8806",
+              "name": "Not Found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/api/v2/countries"
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            }
+          ]
+        },
+        {
+          "name": "Get_publisher_nonexistent_id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "beb2550a-9473-4bc5-a3ea-60e8a7253d71",
+                "exec": [
+                  "//Status code",
+                  "tests[\"Status code is 404\"] = responseCode.code === 404;"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "867886e9-20ee-406c-9393-826e3f235a5b",
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "31d43764-8749-4130-b4eb-986343c04042",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/ssps/1"
+          },
+          "response": [
+            {
+              "id": "4fe88810-b771-4e43-8769-faca3f49acdb",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/api/v2/countries"
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "872be2cd-befa-43b0-82d1-b88e287fd329",
+              "name": "OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/api/v2/countries"
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "989575bd-caff-433d-90d0-6a65bd5d6de6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/api/v2/countries"
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            },
+            {
+              "id": "a895c993-04da-494a-a8dc-87cb14b0461c",
+              "name": "Not Found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": "{{baseUrl}}/api/v2/countries"
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": ""
+            }
+          ]
         }
       ],
       "_postman_id": "e288d47a-401d-4ee8-ac5c-c1e2dd1ce449"
