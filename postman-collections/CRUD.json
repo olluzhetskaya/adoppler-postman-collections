@@ -2610,7 +2610,7 @@
           "response": []
         },
         {
-          "name": "Update_inventory",
+          "name": "Update_inventory_type",
           "event": [
             {
               "listen": "test",
@@ -2700,6 +2700,111 @@
               }
             ],
             "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/inventories/{{siteAppId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Create_inventory_with_categories",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "80230d9c-aa55-47b9-91ec-768fa592ec94",
+                "exec": [
+                  "//Status code",
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "",
+                  "//Content",
+                  "pm.test(\"Contains\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"id\\\"\");",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"name\\\":\\\"Postman: SiteApp with Categories\");  ",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "cf990029-8a00-428c-ba3d-52869752ec4b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": null,\n    \"name\": \"Postman: SiteApp with Categories {{currentSprint}} {{startTimestamp}}\",\n    \"adUnits\": 0,\n    \"blockedCategories\": [],\n    \"categories\": [\n        \"IAB1-4\"\n    ],\n    \"domain\": null,\n    \"appBundle\": null,\n    \"appStoreUrl\": null,\n    \"dsps\": null,\n    \"group\": null,\n    \"languages\": [],\n    \"ssp\": 1977267,\n    \"publisherInventories\": [],\n    \"status\": \"INACTIVE\",\n    \"thirdPartyId\": null,\n    \"type\": \"CTV_OTT\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/inventories"
+          },
+          "response": []
+        },
+        {
+          "name": "Create_inventory_desktopWeb_type",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "6cf9bf8e-23fb-4a51-903e-3969e086db55",
+                "exec": [
+                  "//Status code",
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "",
+                  "//Content",
+                  "pm.test(\"Contains\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"id\\\"\");",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"name\\\":\\\"Postman: SiteApp Desktop\");  ",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"type\\\":\\\"DESKTOP_WEB\"); ",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "fa96230e-b05d-4db4-b4c1-f0dfe802ffc1",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": null,\n    \"name\": \"Postman: SiteApp Desktop {{currentSprint}} {{startTimestamp}}\",\n    \"adUnits\": 0,\n    \"blockedCategories\": [],\n    \"categories\": [\n        \"IAB1-4\"\n    ],\n    \"domain\": null,\n    \"appBundle\": null,\n    \"appStoreUrl\": null,\n    \"dsps\": null,\n    \"group\": null,\n    \"languages\": [],\n    \"ssp\": 1977267,\n    \"publisherInventories\": [],\n    \"status\": \"INACTIVE\",\n    \"thirdPartyId\": null,\n    \"type\": \"DESKTOP_WEB\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/inventories"
           },
           "response": []
         }
