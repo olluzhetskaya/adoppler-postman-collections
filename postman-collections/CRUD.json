@@ -932,7 +932,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n    \"id\": null,\n    \"name\": \"Postman: Publisher {{currentSprint}} {{startTimestamp}}\",\n    \"adPod\": {\n        \"adPodCount\": null,\n        \"adPodDuration\": null,\n        \"adPodLayouts\": [],\n        \"adPodType\": null,\n        \"fallbackMode\": false,\n        \"responseMode\": null,\n        \"serveIncomplete\": false\n    },\n    \"adInsertion\": null,\n    \"adsTxtEntry\": \"ads-test3.env.geomotiv.com, 95589580, DIRECT\",\n    \"blackLists\": {\n        \"advDomains\": null,\n        \"appBundles\": null,\n        \"categories\": {\n            \"allow\": true,\n            \"values\": []\n        },\n        \"creativeIds\": null,\n        \"ips\": null,\n        \"siteDomains\": null\n    },\n    \"contacts\": {\n        \"country\": null,\n        \"email\": null,\n        \"phone\": null,\n        \"responsiblePerson\": null,\n        \"skype\": null\n    },\n    \"cookieSyncBidirect\": false,\n    \"cookieSyncEnabled\": false,\n    \"cookieSyncRedirectParam\": null,\n    \"cookieSyncUrl\": null,\n    \"cookieSyncUserMacro\": null,\n    \"domain\": \"qa1.com\",\n    \"rtbVersion\": null,\n    \"dsps\": null,\n    \"externalId\": \"95589580\",\n    \"group\": null,\n    \"logoBase64\": null,\n    \"marginPercentage\": null,\n    \"paymentDetails\": \"\",\n    \"paymentTerm\": null,\n    \"publisherExchanges\": [],\n    \"publisherType\": null,\n    \"requiredAdmResponse\": false,\n    \"secured\": false,\n    \"sellerType\": \"PUBLISHER\",\n    \"sharedForAll\": false,\n    \"sharedSettings\": [],\n    \"status\": \"INACTIVE\",\n    \"supplySources\": [],\n    \"thirdPartyAdm\": null,\n    \"thirdPartyAdmEnabled\": false,\n    \"thirdPartyId\": null,\n    \"thirdPartyImpressionBeacons\": [],\n    \"thirdPartyBeacons\": [],\n    \"tmax\": null,\n    \"type\": \"PUBLISHER\",\n    \"xandrPlacementId\": null\n}",
+              "raw": "{\n    \"name\": \"Postman: Publisher {{currentSprint}} {{startTimestamp}}\",\n    \"contacts\": {},\n    \"domain\": \"qa.com\",\n    \"paymentDetails\": \"\",\n    \"paymentTerm\": null,\n    \"sellerType\": \"PUBLISHER\",\n    \"status\": \"INACTIVE\",\n    \"type\": \"PUBLISHER\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -1029,7 +1029,7 @@
           ]
         },
         {
-          "name": "Update_publisher_ valid",
+          "name": "Update_publisher_seller_type",
           "event": [
             {
               "listen": "test",
