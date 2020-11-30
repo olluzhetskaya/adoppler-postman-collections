@@ -2608,6 +2608,100 @@
             "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/inventories"
           },
           "response": []
+        },
+        {
+          "name": "Update_inventory",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "87430df2-da6f-421d-9ad9-846280d5ce00",
+                "exec": [
+                  "//Status code",
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "",
+                  "//Content",
+                  "pm.test(\"Contains\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(pm.environment.get(\"siteAppId\"));",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"name\\\":\\\"Postman: Update SiteApp\");  ",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "6c8222f9-94eb-4b52-ad48-7031e2612ac3",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": null,\n    \"name\": \"Postman: Update SiteApp {{currentSprint}} {{startTimestamp}}\",\n    \"adUnits\": 0,\n    \"blockedCategories\": [],\n    \"categories\": [],\n    \"domain\": null,\n    \"appBundle\": null,\n    \"appStoreUrl\": null,\n    \"dsps\": null,\n    \"group\": null,\n    \"languages\": [],\n    \"ssp\": 1977267,\n    \"publisherInventories\": [],\n    \"status\": \"INACTIVE\",\n    \"thirdPartyId\": null,\n    \"type\": \"CTV_OTT\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/inventories/{{siteAppId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Get_inventory",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "c0510800-0733-44b9-84c1-ef90981827bf",
+                "exec": [
+                  "//Status code",
+                  "tests[\"Status code is 200\"] = responseCode.code === 200;",
+                  "",
+                  "//Content",
+                  "pm.test(\"Contains\", function () {",
+                  "    pm.expect(pm.response.text()).to.include(pm.environment.get(\"siteAppId\"));",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "_postman_id": "0fd2e5ac-7905-43df-ad03-2599b548038f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": "{{protocol}}{{server}}.{{domain}}/api/{{api_version}}/inventories/{{siteAppId}}"
+          },
+          "response": []
         }
       ],
       "_postman_id": "f3d9168b-e3f4-4772-8fa3-2317a12775b8"
