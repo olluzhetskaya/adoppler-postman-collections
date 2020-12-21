@@ -2709,6 +2709,8 @@
                   "//Content",
                   "pm.test(\"Contains\", function () {",
                   "    pm.expect(pm.response.text()).to.include(\"\\\"id\\\"\");",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"publisherInventories\");",
+                  "    pm.expect(pm.response.text()).to.include(\"\\\"exchangeInventoryId\");",
                   "});"
                 ],
                 "type": "text/javascript"
